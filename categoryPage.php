@@ -18,22 +18,14 @@
     include 'partials/_dbconnect.php'
     ?>
     <div class="container" id="head">
-        <h1>Welcome to our store</h1>
-    </div>
-    <div class="container">
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repellendus, alias quos atque excepturi magni
-            quo et adipisci, quisquam optio harum cum ex tenetur laborum! Nemo expedita culpa atque. Sunt dolore
-            dignissimos odio recusandae, sed cum tenetur odit voluptate aliquam modi harum, magni vel expedita facilis!
-            Natus doloribus dolore facere.
-        </p>
     </div>
     <div class="container">
         <div class="row">
-            <h3 class="text-center">New Products</h3>
             <?php
-            $sql = "SELECT * FROM `products`";
+            $getCat = $_GET["cat"];
+            $sql = "SELECT * FROM `products` WHERE product_category = '$getCat'";
             $result = mysqli_query($conn, $sql);
+            echo'<h3 class="text-center" style="margin-top: 30px;">'.strtoupper($getCat).'</h3>';
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['product_id'];
                 $name = $row['product_name'];
@@ -42,7 +34,7 @@
                 $img = $row['product_image'];
             echo'
             <div class="col-md-4">
-                <div class="card" style="height:570px ;width: 18rem;">
+                <div class="card" style="height:570px ;width: 18rem; margin-top: 30px;">
                     <img src="'.$img.'" class="card-img-top" alt="'.$name.'" height="300" width="300">
                     <div class="card-body">
                         <h5 class="card-title"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h5>

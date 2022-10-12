@@ -13,50 +13,81 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" type="text/css">
     <link rel="stylesheet" href="productPage.css">
 
-    <?php include 'partials/_header.php' ?>
+    <?php include 'partials/_header.php'; 
+    include 'partials/_dbconnect.php';
+    $id = $_GET['productId'];
+    $sql = "SELECT * FROM `products` WHERE product_id = $id";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $id = $row['product_id'];
+        $name = $row['product_name'];
+        $category = strtoupper($row['product_category']);
+        $desc = $row['product_description'];
+        $price = $row['product_price'];
+        $img = $row['product_image'];
+        $stock = $row['product_stock'];
+    }
+    echo'
     <div class="container" id="productPage">
         <div class="product-container main-product-container">
             <div class="product-left-container">
-                <img src="http://www.lyostore.net/sites/default/files/galeria/x-mini_rave_capsule_speaker_charging_port__tuner.jpg"
-                    alt="" width="540" />
-                image
+                <img src="'.$img.'"
+                    alt="'.$name.'" height="407" width="400" />
             </div>
             <div class="product-col-container">
                 <small>
-                    <p class="product-info-meta">Category</p>
+                    <p class="product-info-meta">'.$category.'</p>
                 </small>
-                <h1 class="product-page">Product Name</h1>
+                <h1 class="product-page">'.$name.'</h1>
                 <p>
                     <b>Quick overview</b><br />
-                    Small description
+                    '.$desc.'
                 </p>
                 <p class="product-price">
                     <b>Price:</b>
                     <span class="old-price">$499</span>
-                    <span class="price">$399</span>
-
-                    <span class="product-price-meta" style="float:right;">
-                        Stock count
+                    <span class="price">$'.$price.'</span>';
+                    if($stock == 0){
+                        echo '<span class="product-price-meta" style="float:right;">
+                        Not in stock
+                    </span>';}
+                    else{
+                        echo '<span class="product-price-meta" style="float:right;">
+                        <strong>In Stock</strong>
                     </span>
-                </p>
+                    </p>';
+                    }
+                if($stock != 0){
+                echo'
                 <p>
                     <span class="quantity">Quantity select</span>
                     <button class="btn btn-primary">Add to cart</button>
                     <br clear="both" />
-                </p>
-            </div>
+                </p>';
+            }
+                else{
+                    echo'
+                <p>
+                    <button class="btn btn-secondary" disabled>Add to cart</button>
+                    <br clear="both" />
+                </p>';
+                }
+        
+            echo '</div>
         </div>
         <br clear="all" />
         <div class="product-container">
             <div class="product-left-container">
-                <h2 class="product-page">Detaljer</h2>
+                <h2 class="product-page text-dark">Reviews</h2>
                 <p class="product-body">
-                    Long description
+                    comments
                 </p>
             </div>
         </div>
         <br clear="all" />
-    </div>
+    </div>';
+    ?>
+    <?php include 'partials/_footer.php' ?>
 </body>
 
 </html>
