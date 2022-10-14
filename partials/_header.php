@@ -13,6 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/store/partials/_header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.2/css/all.min.css">
+
+
 
 </head>
 
@@ -30,6 +33,16 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/store/index.php">Home</a>
                     </li>
+                    <?php
+                    $c=0;
+                    if(isset($_SESSION['cart'])){
+                            $c = count($_SESSION['cart']);
+                    }
+                    echo'
+                        <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/store/shoppingCart.php"><i class="fa-solid fa-cart-shopping">Cart '.$c.'</i></a>
+                    </li>';
+                    ?>
                     <li id="drop"><a href="">Categories</a>
                         <ul>
                             <?php
@@ -54,6 +67,7 @@
                         <li class="nav-item"><a class="nav-link" href="#">Tutorials</a></li>
                     </ul>
                     </li>
+                    include "/partials/_addToCart.php";
                        <li class="nav-item"><a class="btn btn-danger mx-2" href="/store/logout.php">Logout</a></li>';
                     }else{
                         echo'
@@ -63,8 +77,9 @@
                         <li class="nav-item">
                             <a class="btn btn-success mx-1" href="/store/login.php">Login</a>
                         </li>
-                    ';
+                        ';
                     }
+                    
                 ?>
                         </ul>
                         <form class="d-flex" role="search">

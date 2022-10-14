@@ -16,6 +16,8 @@
     <?php 
     include 'partials/_header.php'; 
     include 'partials/_dbconnect.php';
+    $script   = $_SERVER['SCRIPT_NAME'];
+    $params   = $_SERVER['QUERY_STRING'];
     
     $id = $_GET['productId'];
     $sql = "SELECT * FROM `products` WHERE product_id = $id";
@@ -62,17 +64,13 @@
                 if($stock != 0){
                 echo'
                 <p>
-                <form method="post" action="/store/addToCart.php">
-                    <select class="quantity" style="margin-right: 10px;">';
-                    $i=1;
-                    // while($i<=$stock){
-                    //     echo '<input type="text" name="quan" value="'.$i.'">'.$i.'</input>';
-                    //     $i++;
-                    // }
-                    echo'</select>
+                <form action="partials/_addToCart.php" method="post">';
+                    echo'
                     <input type="hidden" name="id" id="id" value='.$id.'>
-                    <input type="text" name="quan" id="quan">
-                    <button class="btn btn-primary">Add to cart</button>
+                    <input type="hidden" name="script" id="script" value='. $script.'>
+                    <input type="hidden" name="params" id="params" value='. $params.'>
+                    <input class="quantity" style="padding: 10px; type="text" name="quan" id="quan" placeholder="Type quantity" value=1>
+                    <button class="btn btn-success" style="margin-left: 10px;">Add to cart</button>
                     <br clear="both" />
                 </from>
                 </p>';

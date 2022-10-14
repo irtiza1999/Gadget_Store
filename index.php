@@ -32,6 +32,7 @@
         <div class="row">
             <h3 class="text-center">New Products</h3>
             <?php
+            ini_set('display_errors', '1');
             $sql = "SELECT * FROM `products`";
             $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($result)) {

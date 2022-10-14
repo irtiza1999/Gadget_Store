@@ -17,8 +17,11 @@ if(!(isset($_SESSION["cart"]))){
         }else{
             echo '<h1>Invalid quantity</h1>';
         }
+        
     }
-echo "<pre>";
-print_r($_SESSION['cart']);
-echo "</pre>";
+$script = $_POST["script"];
+$params = $_POST["params"];
+header("Location: $script?$params");
+exit();
+
 ?>
