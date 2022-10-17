@@ -17,15 +17,38 @@
 <body>
     <?php
         include 'partials/_header.php';
+        if(isset($_GET["err"])){
+        $err = $_GET["err"];
+        if($err=="True"){
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Invalid Quantity.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }else{
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Item quantity updated successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
+
+    if(isset($_GET["remove"])){
+        $err = $_GET["remove"];
+        if($err=="True"){
+            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Item Removed</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }else{
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Error!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
     ?>
     <div class="container">
         <?php
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                    $removeId = $_POST["removeId"];
-                    $item = $_POST["removeItem"];
-                    if (($key = array_search($removeId, $_SESSION["cart"])) !== false) {
-                        unset($_SESSION["cart"][$removeId]);
-                }}
                 if(!empty($_SESSION["cart"])){
                 echo '<h1 style= "padding-top: 50px; padding-bottom: 20px;">You Products</h1>
                         <div class="row">
@@ -45,7 +68,6 @@
                 include 'partials/_dbconnect.php';
                 $total = 0;
                 $arr = $_SESSION["cart"];
-                $keys = array_keys($arr);
                 $bill = 0;
                 foreach($arr as $i => $j){
                     $sql = "SELECT * FROM `products` WHERE `product_id` = $i";
@@ -58,12 +80,11 @@
                         $total = $row['product_price'] * $j;
                         $bill += $total;
                     }
+                $ship = ($bill*0.1);
                 
                 echo'
-                
                 <tbody>
                 <tr>
-                
                 <td class="col-sm-8 col-md-4">
                 <div class="media">
                 
@@ -79,14 +100,19 @@
             </div>
         </td>
         <td class="col-sm-1 col-md-1" style="text-align: center">
-            <input type="email" class="form-control" id="exampleInputEmail1" value="'.$j.'">
-        </td>
+        <form action="/store/partials/_changeQuantity.php" method="post">
+                        <input type="number" class="form-control" id="quan" name="quan" value="'.$j.'">
+                        <input type="hidden" name="id" value="'.$i.'">
+                        <button type="submit" class="btn btn-primary" style="align-items: center; height: 55px; font-size: 14px; margin-top: 10px; text-align: center">Update Quantity</button>
+                      
+        </form>
+            </td>
         <td class="col-sm-1 col-md-1 text-center"><strong>$'.$price.'</strong></td>
         <td class="col-sm-1 col-md-1 text-center"><strong>$'.$total.'</strong></td>
         <td class="col-sm-1 col-md-1">';
         echo'
-            <form action='.$_SERVER['PHP_SELF'].' method="post">
-            <button name= "removeItem" type="button" class="btn btn-danger">
+            <form action="/store/partials/_removeFromCart.php" method="post">
+            <button name= "removeItem" type="submit" class="btn btn-danger">
             <input type="hidden" name="removeId" value="'.$i.'">
                 <span class="glyphicon glyphicon-remove"></span> Remove</button>
             </form>
@@ -109,11 +135,20 @@
         <td>   </td>
         <td>   </td>
         <td>
-            <h5>Estimated shipping</h5>
-        </td>
-        <td class="text-right">
-            <h5><strong>$6.94</strong></h5>
-        </td>
+            <h5">Shipping Cost</h5>
+        </td>';
+        
+        if($bill < 500){                        
+            echo'<td class="text-right">
+            <h5><strong>$'.$ship.'</strong></h5>';
+            $bill += $ship;
+        }
+        else{
+            echo'<td class="text-right">
+            <span class="old-price" style="text-decoration: line-through;font-weight: 400;color:#888;display:inline-block;margin: 0 5px 0;">$'.$ship.'</span>
+            <h5><strong>$0.00</strong></h5>';
+        }
+        echo'</td>
     </tr>
     <tr>
         <td>   </td>
@@ -146,7 +181,13 @@
         </td>
     </tr>';}
     else{
-        echo '<h1 style="text-align: center; padding-top: 50px; padding-bottom: 20px;">Your Cart is Empty</h1>';
+        echo '<h1 style="text-align: center; padding-top: 50px; padding-bottom: 20px;">Your Cart is Empty</h1>
+            <a href="/store/index.php">
+            <button type="button" class="btn btn-primary">
+                Continue Shopping
+            </button>
+            </a>
+        ';
     }
     ?>
         </tbody>
@@ -155,10 +196,7 @@
     </div>
     </div>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+
 </body>
 
 </html>

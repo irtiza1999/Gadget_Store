@@ -16,21 +16,16 @@ if(!(isset($_SESSION["cart"]))){
         }
         if($quan>0 && $quan <= $stock && filter_var($quan,FILTER_VALIDATE_INT)){
                 $_SESSION['cart'][$id] = $quan;
-            // $sql = "Update `products` SET `product_stock` = `product_stock` - $quan WHERE `product_id` = $id";
-            // $result = mysqli_query($conn, $sql);
-            
         }else{
             $script = $_POST["script"];
             $params = $_POST["params"];
             $temp = $_POST["id"];
-            header("Location: $script?$params&err=True");
+            header("Location: /store/shoppingCart.php?err=True");
             exit();
         }
         
     }
-$script = $_POST["script"];
-$params = $_POST["params"];
-header("Location: $script?$params&err=false");
+header("Location: /store/shoppingCart.php?err=False");
 exit();
 
 ?>

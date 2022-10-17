@@ -18,6 +18,21 @@
     include 'partials/_dbconnect.php';
     $script   = $_SERVER['SCRIPT_NAME'];
     $params   = $_SERVER['QUERY_STRING'];
+
+     if(isset($_GET["err"])){
+        $err = $_GET["err"];
+        if($err=="True"){
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Invalid Quantity.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }else{
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Item added to cart.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
     
     $id = $_GET['productId'];
     $sql = "SELECT * FROM `products` WHERE product_id = $id";
