@@ -65,8 +65,7 @@
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3 form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="signupAddress"
-                    name="signupAddress" required></textarea>
+                <textarea class="form-control" placeholder="Address" id="signupAddress" name="signupAddress"></textarea>
                 <label for="signupAddress">Enter your address</label>
             </div>
             <div class="mb-3">
