@@ -45,14 +45,28 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
         }
-    }
+        if(isset($_GET["clear"])){
+        $err = $_GET["clear"];
+        if($err==="True"){
+            echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Successfully cleared the cart.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }}
     ?>
     <div class="container">
         <?php
                 if(!empty($_SESSION["cart"])){
                 echo '<h1 style= "padding-top: 50px; padding-bottom: 20px;">You Products</h1>
-                        <div class="row">
-                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <div class="d-flex flex-row-reverse mb-3">
+                <form action="/store/partials/_clearCart.php" method="post">
+                <button class="btn btn-danger" style="margin-right: 65px;" type="submit">Clear Cart</button>
+                </form>
+                </div>
+                
+                <div class="row">
+                <div class="col-sm-12 col-md-12 col-md-offset-1">
                     <table class="table table-hover">
                         <thead>
                             <tr>
