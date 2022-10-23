@@ -3,6 +3,8 @@
     $showErr = false;
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         include 'partials/_dbconnect.php';
+        
+        // $params = $_POST["params"];
         $userMail = $_POST["loginEmail"];
         $password = $_POST["loginPass"];
         $exists = false;
@@ -57,7 +59,7 @@
                 <label for="loginPass" class="form-label">Password</label>
                 <input type="password" class="form-control" id="loginPass" name="loginPass" required>
             </div>
-            <button type="submit" class="btn btn-success">SignUp</button>
+            <button type="submit" class="btn btn-success">Login</button>
         </form>
     </div>
 </body>

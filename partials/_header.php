@@ -46,13 +46,13 @@
                        </ul>
                     </li>';
                     $curUserName = $_SESSION['user_name'];
+                    $curUserId = $_SESSION['user_id'];
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
                     echo'
                     <li id="drop"><a href="">'.$curUserName.'</a>
                     <ul>
-                        <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Links</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Tutorials</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/store/userProfile.php">User Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/store/orderHistory.php">Order History</a></li>
                     </ul>
                     </li>';
                     }
@@ -72,20 +72,16 @@
                                     <span class="number charity" id="number" style="text-align:center;width:26px;padding-top:3px"><strong><small>'.$c.'</small></strong></span>
                                     </span>
                                 </a>
-
                             </div>
                         </div>
                             ';?>
+                </ul>
 
-
-
-
-
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                        <?php
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <?php
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
                     echo'<li class="nav-item"><a class="btn btn-danger mx-2" href="/store/logout.php">Logout</a></li>';
                 }else{
@@ -106,8 +102,6 @@
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a33530bb41.js" crossorigin="anonymous"></script>
-
-
 
 </body>
 

@@ -3,6 +3,7 @@
     include 'partials/_dbconnect.php';
     $username = $_POST["userName"];
     $userEmail = $_POST["signupEmail"];
+    $userPhone = $_POST["userPhone"];
     $userAddress = $_POST["signupAddress"];
     $password = $_POST["signupPass"];
     $cpassword = $_POST["signupPassConfirm"];
@@ -19,7 +20,7 @@
 
     if(($password==$cpassword) && $exists==false){
         // $hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO `users` (`user_name`, `user_email`, `user_pass`, `user_address`, `user_created_timestamp`) VALUES ('$username', '$userEmail', '$password', '$userAddress', current_timestamp());
+        $sql = "INSERT INTO `users` (`user_name`, `user_email`, `user_pass`, `user_address`, `user_phone_no` ,`user_created_timestamp`) VALUES ('$username', '$userEmail', '$password', '$userAddress', '$userPhone', current_timestamp());
 ";
         $result = mysqli_query($conn,$sql);
         if($result){
@@ -63,6 +64,11 @@
                 <label for="signupEmail" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="signupEmail" name="signupEmail"
                     aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+                <label for="userPhone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="userPhone" name="userPhone" aria-describedby="userPhone"
+                    required>
             </div>
             <div class="mb-3 form-floating">
                 <textarea class="form-control" placeholder="Address" id="signupAddress" name="signupAddress"></textarea>

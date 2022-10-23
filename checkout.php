@@ -15,6 +15,10 @@
 
 <body>
     <?php
+    if(isset($_SESSION['cart']) && count($_SESSION['cart']) == 0){
+        header('Location:index.php');
+        exit();
+    }
     include 'partials/_dbconnect.php'; 
     include 'partials/_header.php';
     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
@@ -24,7 +28,7 @@
         while($row = mysqli_fetch_assoc($result)){
             $name = $row['user_name'];
             $email = $row['user_email'];
-            // $phone = $row['user_phone'];
+            $phone = $row['user_phone_no'];
             $address = $row['user_address'];
         }
     }
@@ -36,25 +40,15 @@
             <div class="row">
                 <div class="col-md-8 mb-4">
                     <div class="card">
-                        <form class="card-body" action="/partials/_handleCheckout.php" method="post">
+                        <form class="card-body" action="/store/partials/_handleCheckout.php" method="post">
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <div class="md-form ">
-                                        <input type="text" id="firstName" name="firstName" class="form-control">
-                                        <label for="firstName" class="">First name</label>
+                                        <input type="text" class="form-control" placeholder="Username" aria-describedby="" name="userName" value="'.$name.'" required>
+                                        <input type="hidden" name="userId" value="'.$id.'">
+                                        <label for="firstName" class="">User name</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="md-form">
-                                        <input type="text" id="lastName" name="lastName" class="form-control">
-                                        <label for="lastName" class="">Last name</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="md-form input-group pl-0 mb-3">
-                            
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="" name="userName" value="'.$name.'" required>
                             </div>
                             <div class=" md-form mb-3">
                                 <input type="text" id="email" class="form-control" placeholder="youremail@example.com"
@@ -65,20 +59,20 @@
                                     name="address" value="'.$address.'" required>
                             </div>
                             <div class="md-form mb-3">
-                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter Your Phone Number" required>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter Your Phone Number" value="'.$phone.'" required>
                             </div>
                             <hr>
                             <h5>Payment method</h5>
                             <div class="d-block my-3">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="cod" id="cod" name="cod">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="cod" checked>
+                                <label class="form-check-label" for="exampleRadios1">
                                     Cash On Delivery
                                 </label>
                                 </div>
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="paypal" id="paypal" name="paypal">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="paypal">
+                                <label class="form-check-label" for="exampleRadios2">
                                     PayPal
                                 </label>
                                 </div>
@@ -153,8 +147,9 @@
         echo'</li>
 
         <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$'.$bill.'</strong>
+            <span>Total (USD)</span>';
+            $_SESSION['bill'] = $bill;
+            echo'<strong>$'.$bill.'</strong>
         </li>
     </ul>
     <form class="card p-2">
@@ -164,12 +159,15 @@
             <div class="input-group-append">
                 <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Redeem</button>
             </div>
+            </div>
         </div>
     </form>
     </div>
     </div>
     </div>
     </main>';
+    $_SESSION['uid']=$id;
+    $_SESSION['bill']=$bill;
     ?>
     <?php include 'partials/_footer.php'; ?>
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">

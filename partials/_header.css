@@ -5,7 +5,7 @@ nav ul {
 	padding: 0;
     margin: 0;
 	list-style: none;
-	/* position: relative; */
+	position: relative;
 	}
 	
 nav ul li {
@@ -13,7 +13,7 @@ nav ul li {
 	}
 
 nav a {
-	/* display:block; */
+	display:block;
 	padding:0 10px;	
 	color:#FFF;
 	/* font-size:20px; */
@@ -47,13 +47,13 @@ nav ul ul li {
 }
 
 /* Second, Third and more Tiers	*/
-/* nav ul ul ul li {
+nav ul ul ul li {
 	position: relative;
 	top:-60px; 
 	left:170px;
-} */
+}
 
 	
 /* Change this in order to change the Dropdown symbol */
-li > a:after { content:  ' ↓'; }
+li > a:after { content:  ' â†“'; }
 li > a:only-child:after { content: ''; }

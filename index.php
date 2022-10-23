@@ -16,7 +16,22 @@
 
 <body>
     <?php include 'partials/_header.php';
-    include 'partials/_dbconnect.php'
+    include 'partials/_dbconnect.php';
+    if(isset($_GET['orderPlaced'])){
+        if($_GET['orderPlaced']=='true'){
+         echo '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Your order has been placed successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+    }else{
+        echo'
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> Your order has not been placed successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            ';
+    }}
     ?><div class="container" id="head">
         <h1>Welcome to our store</h1>
     </div>
