@@ -15,15 +15,15 @@ nav ul li {
 nav a {
 	display:block;
 	padding:0 10px;	
-	color:#FFF;
+	color:#FFF !important;
 	/* font-size:20px; */
 	/* line-height: 60px; */
-	text-decoration:none;
+	text-decoration:none !important;
 }
 
 nav a:hover { 
-	/* background-color: #ffffff; */
-    color: rgb(126, 121, 121);
+	background-color: #3f3f3f;
+    color: rgb(240, 232, 232);
 }
 
 /* Hide Dropdowns by Default */
@@ -47,13 +47,13 @@ nav ul ul li {
 }
 
 /* Second, Third and more Tiers	*/
-nav ul ul ul li {
+/* nav ul ul ul li {
 	position: relative;
 	top:-60px; 
 	left:170px;
-}
+} */
 
 	
 /* Change this in order to change the Dropdown symbol */
-li > a:after { content:  ' â†“'; }
+li > a:after { content:  ' ↓'; }
 li > a:only-child:after { content: ''; }

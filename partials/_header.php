@@ -1,6 +1,8 @@
 <?php
     include 'partials/_dbconnect.php';
-    session_start();
+     if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +12,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/store/partials/_header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/store/partials/_header.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+
 </head>
 
 <body>
@@ -25,6 +30,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -52,9 +58,19 @@
                     <li id="drop"><a href="">'.$curUserName.'</a>
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="/store/userProfile.php">User Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/store/orderHistory.php">Order History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/store/changePassword.php">Change Password</a></li>
                     </ul>
                     </li>';
+                    if($_SESSION['user_type'] == 'admin'){
+                        echo'
+                        <li id="drop"><a href="">Admin Panel</a>
+                            <ul>
+                                <li class="nav-item"><a class="nav-link" href="/store/manageUser.php">Manage Users</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/store/manageProduct.php">Manage Products</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/store/manageOrder.php">Manage Orders</a></li>
+                            </ul>
+                        </li>';
+                    }
                     }
                 ?>
                         </ul><?php
@@ -93,15 +109,16 @@
                         </li>';
                 }
                 ?>
+
             </div>
         </div>
     </nav>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a33530bb41.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
 
 </body>
 
