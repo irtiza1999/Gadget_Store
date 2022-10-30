@@ -15,9 +15,9 @@
     <link rel="stylesheet" type="text/css" href="/store/partials/_header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
 </head>
 
@@ -61,9 +61,10 @@
                     echo'
                        </ul>
                     </li>';
-                    $curUserName = $_SESSION['user_name'];
-                    $curUserId = $_SESSION['user_id'];
+                    
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
+                        $curUserName = $_SESSION['user_name'];
+                        $curUserId = $_SESSION['user_id'];
                     echo'
                     <li id="drop"><a style="margin-left: 5px; padding-top: 7px" class="s1">'.$curUserName.' <i class="fa fa-chevron-down"></i></a></a>
                     <ul>
@@ -106,8 +107,8 @@
                     </ul>';
                 }else{
                     echo'
-                    <button class="btn btn-primary mx-2"><a href="/store/signup.php">Signup</a></button>
-                    <button class="btn btn-success"><a href="/store/login.php">Login</a></button>
+                    <button class="btn btn-primary nav-item mx-2"><a href="/store/signup.php">Signup</a></button>
+                    <button class="btn btn-success nav-item"><a href="/store/login.php">Login</a></button>
                     ';
                 }
                 ?>

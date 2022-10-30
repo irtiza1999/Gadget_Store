@@ -13,7 +13,11 @@
 </head>
 
 <body>
-    <?php 
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+}
+    if($_SESSION['user_type']=='admin'){
     include 'partials/_header.php';
     include 'partials/_dbconnect.php';
     if(isset($_GET['delete']) && $_GET['delete'] == "true"){
@@ -27,7 +31,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
     }
-    ?>
+    echo'
     <h2 style="margin-top: 30px; text-align: center; padding: 10px">Manage Users</h2>
     <div class="col" style="margin-top: 80px;">
         <div class="row flex-lg-nowrap">
@@ -48,8 +52,7 @@
                                             <th class="text-center">Delete User</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
+                                    <tbody>';
                                         $script   = $_SERVER['SCRIPT_NAME'];
                                         $params   = $_SERVER['QUERY_STRING'];
                                         $sql = "SELECT * FROM users";
@@ -116,19 +119,24 @@
                                                     </form>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        ';
+                                        </tr>';
+                                       
                                         }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                        
+   echo'</tbody>
+    </table>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> ';
+    include 'partials/_footer.php';}
+    else{
+        header("location: /store/index.php");
+    }
+        ?>
 </body>
 
 </html>
