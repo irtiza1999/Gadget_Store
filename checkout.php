@@ -19,6 +19,10 @@
         header('Location:index.php');
         exit();
     }
+    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==false){
+        header('Location:login.php');
+        exit();
+    }else{
     include 'partials/_dbconnect.php'; 
     include 'partials/_header.php';
     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
@@ -167,7 +171,7 @@
     </div>
     </main>';
     $_SESSION['uid']=$id;
-    $_SESSION['bill']=$bill;
+    $_SESSION['bill']=$bill;}
     ?>
     <?php include 'partials/_footer.php'; ?>
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">

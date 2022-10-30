@@ -22,7 +22,7 @@
                     $_SESSION['user_type'] = $row['user_type'];
                     header("location: index.php");
                 }else{
-                    $showErr = "Invalid Credentials";
+                    $showErr = true;
                 }
             }
         }else{
@@ -47,7 +47,14 @@
 </head>
 
 <body>
-    <?php include 'partials/_header.php' ?>
+    <?php include 'partials/_header.php';
+    if($showErr){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong> Invalid Credentials.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+    }
+    ?>
     <div class="container">
         <h1 class="text-center">Login</h1>
         <form action="login.php" method="post">

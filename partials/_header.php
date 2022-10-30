@@ -12,10 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/store/partials/_header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/store/partials/_header.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
 
@@ -24,7 +24,9 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/store/index.php">Navbar</a>
+            <a class="navbar-brand" href="/store/index.php"><img
+                    src="https://w7.pngwing.com/pngs/93/456/png-transparent-gadget-devices-technology-smartphone-tablet-smart-phone-android-iphone-ipad-mobile-thumbnail.png"
+                    height="60" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -34,17 +36,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/store/index.php">Home</a>
+                        <a class="nav-link s1" aria-current="page" href="/store/index.php">Home</a>
                     </li>
-                    <li id="drop"><a href="">Categories</a>
-                        <ul>
-                            <?php
+                    <?php
+                    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
+                        echo'<li><a style="margin-right: 5px; padding-top: 7px" class="s1">Categories <i
+                                class="fa fa-chevron-down"></i></a>';
+                    }else{
+                        echo'<li><a style="margin-right: 5px;padding-top: 7px ;width: 100px" class="s1">Categories <i
+                                class="fa fa-chevron-down"></i></a>';
+                    }
+                    ?>
+                    <ul>
+                        <?php
                             $sql = "SELECT DISTINCT product_category FROM `products`";
                             $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result)){
                                 $name = $row['product_category'];
                             echo '
-                                <li class="nav-item"><a class="nav-link" href="/store/categoryPage.php?cat='.$name.'">'.strtoupper($name).'</a></li>
+                                <li class="nav-item"><a class="nav-link s1" href="/store/categoryPage.php?cat='.$name.'">'.strtoupper($name).'</a></li>
                                 
                             ';
                         }
@@ -55,42 +65,34 @@
                     $curUserId = $_SESSION['user_id'];
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
                     echo'
-                    <li id="drop"><a href="">'.$curUserName.'</a>
+                    <li id="drop"><a style="margin-left: 5px; padding-top: 7px" class="s1">'.$curUserName.' <i class="fa fa-chevron-down"></i></a></a>
                     <ul>
-                        <li class="nav-item"><a class="nav-link" href="/store/userProfile.php">User Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/store/changePassword.php">Change Password</a></li>
+                        <li class="nav-item"><a  class="nav-link s1" href="/store/userProfile.php">User Profile</a></li>
+                        <li class="nav-item"><a  class="nav-link s1" href="/store/changePassword.php">Change Password</a></li>
                     </ul>
                     </li>';
                     if($_SESSION['user_type'] == 'admin'){
                         echo'
-                        <li id="drop"><a href="">Admin Panel</a>
+                        <li class="s1" style="margin-left: 7px; padding-top: 7px"><a href="">Admin Panel <i
+                                class="fa fa-chevron-down"></i></a>
                             <ul>
-                                <li class="nav-item"><a class="nav-link" href="/store/manageUser.php">Manage Users</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/store/manageProduct.php">Manage Products</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/store/manageOrder.php">Manage Orders</a></li>
+                                <li class="nav-item"><a  class="nav-link s1" href="/store/manageUser.php">Manage Users</a></li>
+                                <li class="nav-item"><a  class="nav-link s1" href="/store/manageProduct.php">Manage Products</a></li>
+                                <li class="nav-item"><a  class="nav-link s1" href="/store/manageOrder.php">Manage Orders</a></li>
                             </ul>
                         </li>';
                     }
                     }
                 ?>
-                        </ul><?php
+                    </ul>
+
+                    <?php
                             $c=0;
                             if(isset($_SESSION['cart'])){
                             $c = count($_SESSION['cart']);
                             }
-                            echo'
-                                <div style="float:right">
-                                <div class="shopingicons mr-auto">
-                                <a href="/store/shoppingCart.php">
-                                    <span class="icon-shopping-bag"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
-                                    <span class="number charity" id="number" style="text-align:center;width:26px;padding-top:3px"><strong><small>'.$c.'</small></strong></span>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                            ';?>
+                            echo'<a href="/store/shoppingCart.php" style="padding: 10px" class="s1"><i class="fa fa-cart-plus" aria-hidden="true">'.$c.'</i></a>'
+                            ;?>
                 </ul>
 
                 <form class="d-flex" role="search">
@@ -99,20 +101,21 @@
                 </form>
                 <?php
                     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
-                    echo'<li class="nav-item"><a class="btn btn-danger mx-2" href="/store/logout.php">Logout</a></li>';
+                    echo' <ul>
+                    <li class="nav-item"><a  class="btn btn-danger mx-2" href="/store/logout.php">Logout</a></li>
+                    </ul>';
                 }else{
-                    echo'<li class="nav-item">
-                            <a class="btn btn-primary" href="/store/signup.php">Signup</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-success" href="/store/login.php">Login</a>
-                        </li>';
+                    echo'
+                    <button class="btn btn-primary mx-2"><a href="/store/signup.php">Signup</a></button>
+                    <button class="btn btn-success"><a href="/store/login.php">Login</a></button>
+                    ';
                 }
                 ?>
 
             </div>
         </div>
     </nav>
+
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a33530bb41.js" crossorigin="anonymous"></script>
