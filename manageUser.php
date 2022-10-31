@@ -18,6 +18,8 @@
         session_start();
 }
     if($_SESSION['user_type']=='admin'){
+    $script   = $_SERVER['SCRIPT_NAME'];
+    $params   = $_SERVER['QUERY_STRING'];
     include 'partials/_header.php';
     include 'partials/_dbconnect.php';
     if(isset($_GET['delete']) && $_GET['delete'] == "true"){
@@ -28,6 +30,11 @@
     }else if(isset($_GET['delete']) && $_GET['delete'] == "false"){
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> User could not be deleted.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else if(isset($_GET['edit']) && $_GET['edit'] == "success"){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>User Edited successfully</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
     }
@@ -46,15 +53,15 @@
                                             <th class="text-center">User Id</th>
                                             <th class="text-center">User Name</th>
                                             <th class="text-center"> User Email</th>
-                                            <th class="text-center">Joining date</th>
-                                            <th class="text-center">User Type</th>
                                             <th class="text-center">Edit User</th>
+                                            <th class="text-center">Joining date</th>
+                                            <th class="text-center">User Action</th>
                                             <th class="text-center">Delete User</th>
                                         </tr>
                                     </thead>
                                     <tbody>';
-                                        $script   = $_SERVER['SCRIPT_NAME'];
-                                        $params   = $_SERVER['QUERY_STRING'];
+                                        $script = $_SERVER['SCRIPT_NAME'];
+                                        $params = $_SERVER['QUERY_STRING'];
                                         $sql = "SELECT * FROM users";
                                         $result = mysqli_query($conn, $sql);
                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -63,9 +70,9 @@
                                             $user_join = $row['user_created_timestamp'];
                                             $user_email = $row['user_email'];
                                             $user_type = $row['user_type'];
-                                            
+                                        if($user_id!=$_SESSION['user_id']){
                                         echo'
-                                        <from action="" method="post">
+                                        <form action="/store/partials/_editUser.php" method="post">
                                         <tr>
                                             <td class="align-middle">
                                                 <label class="bg-light d-inline-flex justify-content-center align-items-center align-top text-center">#'.$user_id.'</label>
@@ -73,41 +80,50 @@
                                             <td class="align-middle text-center">
                                                 <div
                                                     class="bg-light d-inline-flex justify-content-center align-items-center align-top">
-                                                    <span>'.$user_name.'</span>
+                                                    <input type="hidden" name="user_id" value="'.$user_id.'">
+                                                    <input type="hidden" name="script" value="'.$script.'">
+                                                    <input type="hidden" name="params" value="'.$params.'">
+                                                    <input name="newName" class="form-control fluid" type="text" value="'.$user_name.'"></input>
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <div
                                                     class="bg-light d-inline-flex justify-content-center align-items-center align-top">
-                                                    <input class="form-control" type="text" value="'.$user_email.'"></input>
+                                                    <input name="newMail" class="form-control fluid" type="email" value="'.$user_email.'"></input>
                                                 </div>
                                             </td>
+                                            <td class="text-center align-middle">
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            </td>
+                                            </form> 
                                             <td class="align-middle text-center">
                                                 <div
                                                     class="bg-light d-inline-flex justify-content-center align-items-center align-top">
                                                     <span>'.$user_join.'</span>
                                                 </div>
                                             </td>
-                                            <td class="text-nowrap align-middle">
-                                                <div
-                                                    <div class="form-group form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                    </div>
-                                                    <div class="form-group form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                    </div>
-                                                    <div class="form-group form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                                    </div>
-                                                </div>
-                                            </td>
                                             <td class="text-center align-middle">
-                                                <button type="button" class="btn btn-primary">Save Changes</button>
+                                                 <div
+                                                    class="bg-light d-inline-flex justify-content-center align-items-center align-top">';
+                                                    if($user_type=='admin'){
+                                                        echo'<form action="/store/partials/_removeAdmin.php" method="post">
+                                                        <input type="hidden" name="user_id" value="'.$user_id.'">
+                                                        <input type="hidden" name="script" value="'.$script.'">
+                                                        <input type="hidden" name="params" value="'.$params.'">
+                                                        <button type="submit" class="btn btn-danger">Remove From Admin</button>
+                                                        </form>';
+                                                    }else if($user_type=='user'){
+                                                        echo'<form action="/store/partials/_makeAdmin.php" method="post">
+                                                        <input type="hidden" name="user_id" value="'.$user_id.'">
+                                                        <input type="hidden" name="script" value="'.$script.'">
+                                                        <input type="hidden" name="params" value="'.$params.'">
+                                                        <button type="submit" class="btn btn-success">Make Admin</button>
+                                                        </form>';
+                                                    }
+                                                echo'</div>
                                             </td>
-                                            </from>
+                                            
+                                            
                                             
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
@@ -121,7 +137,7 @@
                                             </td>
                                         </tr>';
                                        
-                                        }
+                                        }}
                                         
    echo'</tbody>
     </table>

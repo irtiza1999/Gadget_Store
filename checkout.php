@@ -19,7 +19,7 @@
         header('Location:index.php');
         exit();
     }
-    if(!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn']==false){
+    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==false){
         header('Location:login.php');
         exit();
     }else{
