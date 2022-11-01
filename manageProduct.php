@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
@@ -43,6 +43,10 @@
             <h1 style= "padding-top: 50px; padding-bottom: 20px;">You Products</h1>
                 <div class="row">
                 <div class="col-sm-12 col-md-12 col-md-offset-1">
+                <form action="/store/editProduct.php" method = "post">
+                <button class="btn btn-success" style= "margin-bottom: 10px">Add new Product <i class="fa fa-plus"></i>
+                </button>
+                </form>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -83,11 +87,11 @@
         <td class="text-center"><strong>'.$stock.'</strong></td>
         <td class="text-center"><strong>$'.$price.'</strong></td>
         <td class="text-center">
-                <form action="/store/partials/_editProduct.php" method = "post">
+                <form action="/store/editProduct.php" method = "post">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="script" id="script" value='. $script.'>
                         <input type="hidden" name="params" id="params" value='. $params.'>
-                        <button type="submit" class="btn btn-danger">Delete Product</button>
+                        <button type="submit" class="btn btn-primary">Edit Product</button>
                     </form>
         </td>
         <td class="text-center">
