@@ -58,6 +58,7 @@
                                             <th class="text-center">User Id</th>
                                             <th class="text-center">User Name</th>
                                             <th class="text-center"> User Email</th>
+                                            <th class="text-center"> User Address</th>
                                             <th class="text-center"> Change Password</th>
                                             <th class="text-center"> Confirm Password</th>
                                             <th class="text-center">Edit User</th>
@@ -77,6 +78,7 @@
                                             $user_join = $row['user_created_timestamp'];
                                             $user_email = $row['user_email'];
                                             $user_type = $row['user_type'];
+                                            $user_address  = $row['user_address'];
                                         if($user_id!=$_SESSION['user_id']){
                                         echo'
                                         <form action="/store/partials/_editUser.php" method="post">
@@ -97,6 +99,12 @@
                                                 <div
                                                     class="bg-light d-inline-flex justify-content-center align-items-center align-top">
                                                     <input name="newMail" class="form-control fluid" type="email" value="'.$user_email.'"></input>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div
+                                                    class="bg-light d-inline-flex justify-content-center align-items-center align-top">
+                                                    <input name="newAddress" class="form-control fluid" type="text" value="'.$user_address.'"></input>
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center">

@@ -8,9 +8,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $newMail = $_POST['newMail'];
     $newPass = $_POST['newPass'];
     $newCPass = $_POST['cnewPass'];
+    $newAddress = $_POST['newAddress'];
     if(strlen($newCPass)>0){    
         if($newPass == $newCPass){
-            $sql = "UPDATE `users` SET `user_name` = '$newName', `user_email` = '$newMail', `user_pass` = '$newPass' WHERE `user_id` = $user_id";
+            $sql = "UPDATE `users` SET `user_name` = '$newName', `user_email` = '$newMail', `user_pass` = '$newPass',`user_address`='$newAddress' WHERE `user_id` = $user_id";
             $result = mysqli_query($conn, $sql);
             if($result){
                 header("Location: /store/manageUser.php?edit=success");
@@ -22,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             header("Location: /store/manageUser.php?edit=failed");
         }exit();
     }else{
-        $sql = "UPDATE `users` SET `user_name` = '$newName', `user_email` = '$newMail' WHERE `user_id` = $user_id";
+        $sql = "UPDATE `users` SET `user_name` = '$newName', `user_email` = '$newMail', `user_address`='$newAddress' WHERE `user_id` = $user_id";
         $result = mysqli_query($conn, $sql);
     if($result){
         header("Location: /store/manageUser.php?edit=success");
