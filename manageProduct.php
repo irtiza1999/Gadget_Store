@@ -26,7 +26,7 @@
 
         if(isset($_GET['delete']) && $_GET['delete'] == "true"){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Product deleted successfully.
+        <strong>Success!</strong> Product deleted.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
     }else if(isset($_GET['delete']) && $_GET['delete'] == "false"){
@@ -34,19 +34,34 @@
         <strong>Error!</strong> Product could not be deleted.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
+    }else if(isset($_GET['edit']) && $_GET['edit'] == "false"){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> Product could not be edited.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else if(isset($_GET['edit']) && $_GET['edit'] == "true"){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Product edited.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else if(isset($_GET['add']) && $_GET['add'] == "false"){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> Product could not be added.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }else if(isset($_GET['add']) && $_GET['add'] == "true"){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Product added.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
     }
-
-        $script   = $_SERVER['SCRIPT_NAME'];
-        $params   = $_SERVER['QUERY_STRING'];
         echo'
         <div class="container">
             <h1 style= "padding-top: 50px; padding-bottom: 20px;">You Products</h1>
                 <div class="row">
                 <div class="col-sm-12 col-md-12 col-md-offset-1">
-                <form action="/store/editProduct.php" method = "post">
-                <button class="btn btn-success" style= "margin-bottom: 10px">Add new Product <i class="fa fa-plus"></i>
-                </button>
-                </form>
+                <a href="/store/addProduct.php"><button class="btn btn-success" style= "margin-bottom: 10px">Add new Product <i class="fa fa-plus"></i>
+                </button></a>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -69,6 +84,8 @@
                     $price = $row['product_price'];
                     $image = $row['product_image'];
                     $stock = $row['product_stock'];
+                    $desc = $row['product_description'];
+                    $category = $row['product_category'];
                 echo'
                 <tr>
                 <td class="" style="text-align: center">
@@ -87,18 +104,20 @@
         <td class="text-center"><strong>'.$stock.'</strong></td>
         <td class="text-center"><strong>$'.$price.'</strong></td>
         <td class="text-center">
-                <form action="/store/editProduct.php" method = "post">
+                <form action="/store/editProduct.php" method = "get">
                         <input type="hidden" name="id" value="'.$id.'">
-                        <input type="hidden" name="script" id="script" value='. $script.'>
-                        <input type="hidden" name="params" id="params" value='. $params.'>
-                        <button type="submit" class="btn btn-primary">Edit Product</button>
+                        <input type="hidden" name="name" value="'.$name.'">
+                        <input type="hidden" name="price" value="'.$price.'">
+                        <input type="hidden" name="image" value="'.$image.'">
+                        <input type="hidden" name="stock" value="'.$stock.'">
+                        <input type="hidden" name="desc" value="'.$desc.'">
+                        <input type="hidden" name="category" value="'.$category.'">
+                        <button class="btn btn-primary" type="submit">Edit <i class="fa fa-edit"></i></button>
                     </form>
         </td>
         <td class="text-center">
                 <form action="/store/partials/_deleteProduct.php" method = "post">
                         <input type="hidden" name="id" value="'.$id.'">
-                        <input type="hidden" name="script" id="script" value='. $script.'>
-                        <input type="hidden" name="params" id="params" value='. $params.'>
                         <button type="submit" class="btn btn-danger">Delete Product</button>
                     </form>
         </td>

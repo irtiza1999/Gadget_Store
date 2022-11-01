@@ -17,69 +17,54 @@
     ob_start();
     include 'partials/_dbconnect.php';
     include 'partials/_header.php';
-    if($_SERVER["REQUEST_METHOD"]=="GET"){
-        $name = $_GET["name"];
-        $category = $_GET["category"];
-        $price = $_GET["price"];
-        $description = $_GET["desc"];
-        $id = $_GET["id"];
-        $image = $_GET["image"];
-        $stock = $_GET["stock"];
-        
-    }
     if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $newName = $_POST["newName"];
-        $newCategory = $_POST["newCategory"];
-        $newPrice = $_POST["newPrice"];
-        $newDescription = $_POST["newDesc"];
-        $newImage = $_POST["newImage"];
-        $newStock = $_POST["newStock"];
-        $id = $_POST["id"];
-        $sql = "UPDATE `products` SET `product_name` = '$newName', `product_category` = '$newCategory', `product_price` = '$newPrice', `product_description` = '$newDescription', `product_image` = '$newImage', `product_stock` = '$newStock' WHERE `products`.`product_id` = $id";
+        $name = $_POST["name"];
+        $category = $_POST["category"];
+        $price = $_POST["price"];
+        $description = $_POST["desc"];
+        $image = $_POST["image"];
+        $stock = $_POST["stock"];
+        $sql = "INSERT INTO `products` (`product_name`, `product_category`, `product_price`, `product_description`, `product_image`, `product_stock`) VALUES ('$name', '$category', '$price', '$description', '$image', '$stock')";
         $result = mysqli_query($conn, $sql);
         if($result){
-            header("Location: /store/manageProduct.php?edit=true");
-            exit();
-        
-    }else{
-        header("Location: /store/manageProduct.php?edit=false");
-        exit();
-    }
-    }
+            header("Location: /store/manageProduct.php?add=true");
+        }
+          else{
+            header("Location: /store/manageProduct.php?add=false");
+          }}
     echo'
     <div class="container">
-        <h1 class="text-center">Edit Product</h1>
+        <h1 class="text-center">Add Product</h1>
         <form action="'.$_SERVER["PHP_SELF"].'" method="post">
             <div class="mb-3">
                 <label for="userName" class="form-label">Product Name</label>
-                <input type="text" class="form-control" name="newName" value="'.$name.'" aria-describedby="userName"
+                <input type="text" class="form-control" name="name" aria-describedby="userName"
                     required>
             </div>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Category</label>
-                <input type="text" class="form-control" name="newCategory" value="'.$category.'"
+                <input type="text" class="form-control" name="category"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Description</label>
-                <input type="text" class="form-control" name="newDesc" value="'.$description.'"
+                <input type="text" class="form-control" name="desc"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Price</label>
-                <input type="text" class="form-control" name="newPrice" value="'.$price.'"
+                <input type="text" class="form-control" name="price"
                     aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Stock</label>
-                <input type="text" class="form-control" name="newStock" value="'.$stock.'"
+                <input type="text" class="form-control" name="stock"
                     aria-describedby="emailHelp" required>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Image</label>
-                <input type="text" class="form-control" name="newImage" value="'.$image.'"
+                <input type="text" class="form-control" name="image"
                     aria-describedby="emailHelp" required>
             </div>
-            <input type="hidden" name="id" value="'.$id.'">
             <button type="submit" class="btn btn-success mt-3">Confirm</button>
         </form>
     </div>';
