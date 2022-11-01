@@ -37,6 +37,11 @@
         <strong>User Edited successfully</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
+    }else if(isset($_GET['edit']) && $_GET['edit'] == "failed"){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error while editing user</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
     }
     echo'
     <h2 style="margin-top: 30px; text-align: center; padding: 10px">Manage Users</h2>
@@ -53,6 +58,8 @@
                                             <th class="text-center">User Id</th>
                                             <th class="text-center">User Name</th>
                                             <th class="text-center"> User Email</th>
+                                            <th class="text-center"> Change Password</th>
+                                            <th class="text-center"> Confirm Password</th>
                                             <th class="text-center">Edit User</th>
                                             <th class="text-center">Joining date</th>
                                             <th class="text-center">User Action</th>
@@ -90,6 +97,18 @@
                                                 <div
                                                     class="bg-light d-inline-flex justify-content-center align-items-center align-top">
                                                     <input name="newMail" class="form-control fluid" type="email" value="'.$user_email.'"></input>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div
+                                                    class="bg-light d-inline-flex justify-content-center align-items-center align-top">
+                                                    <input name="newPass" class="form-control fluid" type="password"></input>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div
+                                                    class="bg-light d-inline-flex justify-content-center align-items-center align-top">
+                                                    <input name="cnewPass" class="form-control fluid" type="password"></input>
                                                 </div>
                                             </td>
                                             <td class="text-center align-middle">
