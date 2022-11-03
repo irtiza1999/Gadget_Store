@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://w7.pngwing.com/pngs/93/456/png-transparent-gadget-devices-technology-smartphone-tablet-smart-phone-android-iphone-ipad-mobile-thumbnail.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
@@ -54,7 +56,7 @@
         $price=$row['product_price'];
         $img=$row['product_image'];
         echo'
-<div class="col-md-4"><div class="card"style="height:570px ;width: 18rem;"><img src="'.$img.'"class="card-img-top"alt="'.$name.'"height="300"width="300"><div class="card-body"><h5 class="card-title"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h5><p class="card-text">'.substr($desc,0,200).'...</p><a href="/store/productPage.php?productId='.$id.'"class="btn btn-primary">View Details</a></div></div></div>';}
+<div class="col-md-4"><div class="card"style="height:570px ;width: 18rem; margin-top: 50px"><img src="'.$img.'"class="card-img-top"alt="'.$name.'"height="300"width="300"><div class="card-body"><h5 class="card-title"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h5><p class="card-text">'.substr($desc,0,200).'...</p><a href="/store/productPage.php?productId='.$id.'"class="btn btn-primary">View Details</a></div></div></div>';}
 ?>
         </div>
     </div><?php include 'partials/_footer.php'?>
