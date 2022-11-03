@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon"
         href="https://w7.pngwing.com/pngs/93/456/png-transparent-gadget-devices-technology-smartphone-tablet-smart-phone-android-iphone-ipad-mobile-thumbnail.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -45,27 +50,67 @@
     </div>
     <div class="container">
         <div class="row">
-            <h3 class="text-center">New Products</h3><?php ini_set('display_errors', '1');
+            <h3 class="text-center">New Products</h3>
+            <div class="container d-flex justify-content-center mt-50 mb-50">
+                <div class="row">
+                    <?php ini_set('display_errors', '1');
+    $script   = $_SERVER['SCRIPT_NAME'];
     $sql="SELECT * FROM `products`";
     $result=mysqli_query($conn, $sql);
 
     while ($row=mysqli_fetch_assoc($result)) {
         $id=$row['product_id'];
         $name=$row['product_name'];
-        $desc=$row['product_description'];
         $price=$row['product_price'];
         $img=$row['product_image'];
+        $price = $row['product_price'];
+        $category = $row['product_category'];
         echo'
-<div class="col-md-4"><div class="card"style="height:570px ;width: 18rem; margin-top: 50px"><img src="'.$img.'"class="card-img-top"alt="'.$name.'"height="300"width="300"><div class="card-body"><h5 class="card-title"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h5><p class="card-text">'.substr($desc,0,200).'...</p><a href="/store/productPage.php?productId='.$id.'"class="btn btn-primary">View Details</a></div></div></div>';}
+        
+           <div class="col-md-4 mt-2">
+                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-img-actions">
+                                                <img src="'.$img.'" class="card-img img-fluid" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="card-body bg-light text-center">
+                                        <div class="mb-2">
+                                            <h6 class="font-weight-semibold mb-2">
+                                                <a href="/store/productPage.php?productId='.$id.'" data-abc="true">'.$name.'</a>
+                                            </h6>
+                                            <a href="" class="text-muted" data-abc="true">'.strtoupper($category).'</a>
+                                        </div>
+                                        <h3 class="mb-0 font-weight-semibold">$'.$price.'</h3>
+                                        <form action="partials/_addToCart.php" method="post">
+                                            <input type="hidden" name="id" id="id" value='.$id.'>
+                                            <input type="hidden" name="script" id="script" value='. $script.'>
+                                            <input type="hidden" name="quan" id="quan" value=1>
+                                            <button type="submit" class="bg-cart btn btn-success mt-10"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+                                        </form>
+                                    </div>
+                                </div>                             
+           </div> 
+';}
+
+
 ?>
-        </div>
-    </div><?php include 'partials/_footer.php'?>
-    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
-    </script>
-    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+
+                </div>
+            </div>
+            <?php include 'partials/_footer.php'?>
+            <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
+            </script>
+            <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+                crossorigin="anonymous">
+            </script>
+            <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+            </script>
 </body>
 
 </html>

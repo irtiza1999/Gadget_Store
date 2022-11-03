@@ -51,13 +51,13 @@
 <body>
     <?php include 'partials/_header.php';
     if($showErr){
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert" data-wow-delay="1s">
                         <strong>Error!</strong> Invalid Credentials.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
     }
     else if(isset($_GET['signupsuccess']) && $_GET['signupsuccess'] == "true"){
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        echo '<div class="alert alert-success alert-dismissible fade show data-mdb-delay="3000"" role="alert">
                         <strong>You can login now</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';

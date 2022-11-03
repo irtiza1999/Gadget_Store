@@ -89,7 +89,7 @@
                     <input class="quantity" style="padding: 10px; type="text" name="quan" id="quan" placeholder="Type quantity" value=1>
                     <button class="btn btn-success" style="margin-left: 10px;">Add to cart</button>
                     <br clear="both" />
-                </from>
+                </form>
                 </p>';
                     }
     else{
