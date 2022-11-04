@@ -59,7 +59,7 @@
     }
         echo'
         <div class="container">
-            <h1 style= "padding-top: 50px; padding-bottom: 20px;">You Products</h1>
+            <h1 style= "padding-top: 50px; padding-bottom: 20px;">All Products</h1>
                 <div class="row">
                 <div class="col-sm-12 col-md-12 col-md-offset-1">
                 <a href="/store/addProduct.php"><button class="btn btn-success" style= "margin-bottom: 10px">Add new Product <i class="fa fa-plus"></i>
