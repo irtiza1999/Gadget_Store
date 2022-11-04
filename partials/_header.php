@@ -94,7 +94,8 @@
                             if(isset($_SESSION['cart'])){
                             $c = count($_SESSION['cart']);
                             }
-                            echo'<a href="/store/shoppingCart.php" style="padding: 10px" class="s1"><i class="fa fa-cart-plus" aria-hidden="true">'.$c.'</i></a>'
+                            echo'
+                                <a href="/store/shoppingCart.php" style="padding: 10px; margin-right: 3px" class="s1 rounded-circle"><i class="fa fa-cart-plus" aria-hidden="true"><span class=" badge rounded-pill bg-secondary" style="margin-left: 3px;">'.$c.'</span></i></a>'
                             ;?>
                 </ul>
 

@@ -1,4 +1,4 @@
-.mt-50{
+ .mt-50{
 
     margin-top: 50px;
 }
@@ -6,7 +6,7 @@
 .mb-50{
 
     margin-bottom: 50px;
-}
+} 
 
 .card {
     position: relative;
@@ -25,23 +25,26 @@
 .card-img-actions {
     position: relative;
     overflow: hidden;
-    height: 450px;
+     height: 450px; 
 }
 .card-body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
     text-align: center;
-}
 
-.card-img{
 }
-
-.star{
-        color: red;
+.card-img-actions img {
+    width: 100%;
+    height: 100%; 
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
 }
 
 .bg-cart {
+    margin-top: 13px;
     background-color:orange;
     color:#fff;
 }

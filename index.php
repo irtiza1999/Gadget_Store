@@ -37,9 +37,7 @@
             </div>
             ';
     }}
-    ?><div class="container" id="head">
-        <h1>Welcome to our store</h1>
-    </div>
+    ?>
     <div class="container">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repellendus,
             alias quos atque excepturi magni quo et adipisci,
@@ -79,14 +77,14 @@
                                             <h6 class="font-weight-semibold mb-2">
                                                 <a href="/store/productPage.php?productId='.$id.'" data-abc="true">'.$name.'</a>
                                             </h6>
-                                            <a href="" class="text-muted" data-abc="true">'.strtoupper($category).'</a>
+                                            <a href="/store/categoryPage.php?cat='.$category.'" class="text-muted" data-abc="true">'.strtoupper($category).'</a>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">$'.$price.'</h3>
                                         <form action="partials/_addToCart.php" method="post">
                                             <input type="hidden" name="id" id="id" value='.$id.'>
                                             <input type="hidden" name="script" id="script" value='. $script.'>
                                             <input type="hidden" name="quan" id="quan" value=1>
-                                            <button type="submit" class="bg-cart btn btn-success mt-10"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+                                            <button type="submit" class="bg-cart btn btn-success"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
                                         </form>
                                     </div>
                                 </div>                             

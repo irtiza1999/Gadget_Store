@@ -17,17 +17,14 @@
 
 <body>
     <?php
+    ob_start();
     if(isset($_SESSION['cart']) && count($_SESSION['cart']) == 0){
         header('Location:index.php');
         exit();
     }
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==false){
-        header('Location:login.php');
-        exit();
-    }else{
     include 'partials/_dbconnect.php'; 
     include 'partials/_header.php';
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
+    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']=='true'){
         $id = $_SESSION['user_id'];
         $sql= "SELECT * FROM `users` WHERE user_id = '$id'";
         $result = mysqli_query($conn,$sql);
@@ -37,7 +34,7 @@
             $phone = $row['user_phone_no'];
             $address = $row['user_address'];
         }
-    }
+    
     echo'
     <main class="mt-5">
     
@@ -174,6 +171,9 @@
     </main>';
     $_SESSION['uid']=$id;
     $_SESSION['bill']=$bill;}
+    else{
+        header('Location:login.php');
+    }
     ?>
     <?php include 'partials/_footer.php'; ?>
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
