@@ -50,14 +50,22 @@
                         <div class="col"> <strong>Address:</strong> <br>'.$order_user_address.' </div>
                         <div class="col"> <i class="fa fa-phone"></i> <strong>Phone No:</strong> 
                             '.$order_user_phone.' </div>
-                        <div class="col"> <strong>Status:</strong> <br> '.$order_status.' </div>
+                        <div class="col"> <strong>Payment Status:</strong> <br> '.strtoupper($order_payment_status).' </div>
+                        <div class="col"> <strong>Status:</strong> <br> '.strtoupper($order_status).' </div>
                         <div class="col"> <strong>Delivery Man: </strong>name <br> <i class="fa fa-phone"></i> <strong>Phone No:</strong> 
                             Phone No delivery </div>
                     </div>
                 </article>
                 <div class="track">';
-                    if($order_status == "On The Way"){
+                if($order_payment_status == 'not paid'){
+                     echo'
+                            <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">
+                            Not Paid</span> </div>';
+                }else{
+                    if($order_status == "on the way"){
                         echo'
+                            <div class="step active"> <span class="icon"> <i class="fa fa-money"></i> </span> <span class="text">
+                                Paid</span> </div>
                             <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
                             class="text">Order confirmed</span> </div>
                             <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">
@@ -65,8 +73,10 @@
                             <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
                             class="text">Delivered</span> </div>
                         ';
-                    }elseif($order_status == "Complete"){
+                    }elseif($order_status == "complete"){
                     echo'
+                    <div class="step active"> <span class="icon"> <i class="fa fa-money"></i> </span> <span class="text">
+                    Paid</span> </div>
                     <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
                             class="text">Order confirmed</span> </div>
                     <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">
@@ -81,12 +91,13 @@
                             Picked by the Delivery man</span> </div>
                     <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
                             class="text">Delivered</span> </div>';
-                    }
+                    }}
                 echo'
                 </div>
                 <hr>
                 <ul class="row">';
                 $cart = json_decode($order_cart, true);
+                $sum = 0;
                 foreach($cart as $key => $item){
                     $sql3 = "SELECT * FROM `products` WHERE `product_id` = $key";
                     $quan = $item[0];
@@ -94,7 +105,9 @@
                     while($row = mysqli_fetch_assoc($result3)){
                         $product_name = $row['product_name'];
                         $product_price = $row['product_price'];
-                        $product_image = $row['product_image'];}
+                        $product_image = $row['product_image'];
+                        $sum += ($product_price * $quan)              
+                        ;}
                     
                 echo'
                     <li class="col-md-4">
@@ -105,13 +118,18 @@
                                     class="text-muted">$'.$product_price.' X '.$quan.' = $'.$product_price * $quan.' </span>
                             </figcaption>
                         </figure>
-                    </li>';
+                    </li>
+                    ';
+                    
                 }
+                
                 echo'
                 </ul>
                 <hr>
-                <div>
-                    <span class="text-muted text-right">Shipping Cost = $'.$bill - $product_price * $quan.' </span>
+                <div> <strong>Order summary</strong> </div>
+                <dl class="dlist-align">
+                    <dt>Total price = $'.$sum.'</dt>
+                    <span class="text-muted text-right">Shipping Cost = $'.$bill - $sum.' </span>
                     <h4 class="text-right"><strong>Total Bill : $'.$bill.' </strong></h4>
                 </div>
             </div>
