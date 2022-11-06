@@ -54,10 +54,45 @@
                 <a href="/store/orderPage.php?orderId='.$orderId.'"><span>#'.$orderId.'</span></a>
                 </td>
                 <td class="text-center"><strong>$'.$amountPaid.'</strong></td>
-                <td class="text-center"><strong>'.$paymentMethod.'</strong></td>
-                <td class="text-center"><strong>'.$payStatus.'</strong></td>
-                <td class="text-center"><strong>'.$status.'</strong></td>
-                </tr>
+                <td class="text-center"><strong>'.$paymentMethod.'</strong></td>';
+                if($payStatus == 'Not Paid'){
+                    echo'
+                    <td class="text-center">
+                    <form>
+                    <button type="submit" class="btn btn-primary">Mark as Paid</button>
+                    </form>
+                    </td>
+                    <td class="text-center"><strong style="color: red;">'.$payStatus.'</strong></td>
+                    ';
+                }
+                else{
+                    echo'
+                    <td class="text-center"><strong style="color: green;">'.$payStatus.'</strong></td>
+                    ';
+                if($status=="Not Delivered"){
+                    echo'
+                    <td class="text-center">
+                    <form>
+                    <button type="submit" class="btn btn-warning">Mark as Delivered</button>
+                    </form>
+                    </td>';
+                }else if($status=="on the way"){
+                    echo'
+                    <td class="text-center">
+                    <form>
+                    <button type="submit" class="btn btn-success">Mark as Complete</button>
+                    </form>
+                    </td>';
+                }
+                else{
+                    echo'
+                    <td class="text-center"><strong style="color: green;">'.$status.'</strong></td>
+                    ';
+                }
+                }
+                
+                echo
+                '</tr>
         </a>';
                 }}
                 ;}

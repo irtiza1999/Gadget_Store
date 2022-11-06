@@ -57,7 +57,7 @@
                     </div>
                 </article>
                 <div class="track">';
-                if($order_payment_status == 'not paid'){
+                if($order_payment_status == 'Not Paid'){
                      echo'
                             <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">
                             Not Paid</span> </div>';
