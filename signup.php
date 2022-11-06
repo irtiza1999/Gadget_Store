@@ -21,8 +21,8 @@
         }
 
     if(($password==$cpassword) && $exists==false){
-        // $hash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO `users` (`user_name`, `user_email`, `user_pass`, `user_address`, `user_phone_no` ,`user_created_timestamp`) VALUES ('$username', '$userEmail', '$password', '$userAddress', '$userPhone', current_timestamp());
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO `users` (`user_name`, `user_email`, `user_pass`, `user_address`, `user_phone_no` ,`user_created_timestamp`) VALUES ('$username', '$userEmail', '$hash', '$userAddress', '$userPhone', current_timestamp());
 ";
         $result = mysqli_query($conn,$sql);
         if($result){

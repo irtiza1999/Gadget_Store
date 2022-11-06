@@ -13,7 +13,7 @@
         $num = mysqli_num_rows($result);
         if($num==1){
             while($row = mysqli_fetch_assoc($result)){
-                if($password == $row['user_pass']){
+                if(password_verify($password, $row['user_pass'])){
                     $login = true;
                     session_start();
                     $_SESSION['loggedIn'] = true;
