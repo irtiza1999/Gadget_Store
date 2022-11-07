@@ -99,7 +99,7 @@
                             ;?>
                 </ul>
 
-                <form class="d-flex" role="search" action="/store/searchPage.php" method="post">
+                <form class="d-flex" role="search" action="/store/searchPage.php" method="get">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                         name="search">
                     <button class="btn btn-outline-success" type="submit">Search</button>

@@ -196,12 +196,15 @@
         </td>
     </tr>';}
     else{
-        echo '<h1 style="text-align: center; padding-top: 50px; padding-bottom: 20px;">Your Cart is Empty</h1>
-            <a href="/store/index.php">
+        echo '<div class="jumbotron jumbotron-fluid" style="align-items: center; margin-top: 50px; padding-bottom: 20px; height: 250px">
+        <div class="container">
+          <p class="display-4">Your cart is empty</p>
+          <a href="/store/index.php">
             <button type="button" class="btn btn-primary">
                 Continue Shopping
             </button>
             </a>
+        </div>
         ';
     }
     ?>
