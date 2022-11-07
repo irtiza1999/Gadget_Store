@@ -13,21 +13,22 @@
         $num = mysqli_num_rows($result);
         if($num==1){
             while($row = mysqli_fetch_assoc($result)){
-                if($oldPassword == $row['user_pass']){
+                if(password_verify($oldPassword, $row['user_pass'])){
                     $newPassword = $_POST['newPassword'];
                     $cNewPassword = $_POST['CnewPassword'];
                     if($newPassword == $cNewPassword){
-                        $sql = "UPDATE `users` SET `user_pass` = '$newPassword' WHERE `users`.`user_id` = $user_id";
+                        $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $sql = "UPDATE `users` SET `user_pass` = '$hash' WHERE `users`.`user_id` = $user_id";
                         $result = mysqli_query($conn,$sql);
                         if($result){
                             session_destroy();
-                            header("location: index.php");
+                            header("location: index.php?passwordChanged=true");
                         }
                     }else{
-                        $showErr = "Passwords do not match";
+                        $showErr = true;
                     }
                 }else{
-                    $showErr = "Invalid Credentials";
+                    $showErr = true;
                 }
             }
         }else{
@@ -54,7 +55,14 @@
 </head>
 
 <body>
-    <?php include 'partials/_header.php' ?>
+    <?php include 'partials/_header.php';
+    if($showErr){
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error while changing password</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }
+    ?>
     <div class="container">
         <h1 class="text-center">Change Password</h1>
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">

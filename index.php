@@ -37,6 +37,14 @@
             </div>
             ';
     }}
+    if(isset($_GET['passwordChanged'])){
+        if($_GET['passwordChanged']=='true'){
+         echo '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Your password has been changed successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+    }}
     ?>
     <div class="container">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repellendus,
