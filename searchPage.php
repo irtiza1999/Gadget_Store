@@ -17,10 +17,11 @@
             <?php
                 $noResult = true;
                 $temp = $_GET['search'];
+                
                 $sql = "SELECT * FROM `products` WHERE product_name LIKE '%$temp%' or product_category LIKE '%$temp%' or product_description LIKE '%$temp%'";
                 $result = mysqli_query($conn, $sql);
                 $check = mysqli_num_rows($result);
-                if($check>0){
+                if($check>0 &&strlen($temp)>0){
                     $noResult = false;
                 }
                 echo'<h1 class="my-3">Search results for <em> '.$_GET['search'].'</em></h1>
@@ -28,6 +29,7 @@
             <div class="container">
             <div class="row">
             ';
+            if(strlen($temp)>0){
                 while($row=mysqli_fetch_assoc($result)){
                     $id = $row['product_id'];
                 $name = $row['product_name'];
@@ -46,8 +48,9 @@
                     </div>
                 </div>
             </div>
-                ';
-    }
+                ';}
+            }
+    
     echo' </div>
     </div>';
     if($noResult){
