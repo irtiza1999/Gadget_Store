@@ -34,10 +34,10 @@
             if(strlen($temp)>0){
                 while($row=mysqli_fetch_assoc($result)){
                     $id = $row['product_id'];
-                $name = $row['product_name'];
-                $desc = $row['product_description'];
-                $price = $row['product_price'];
-                $img = $row['product_image'];
+                    $name = $row['product_name'];
+                    $desc = $row['product_description'];
+                    $price = $row['product_price'];
+                    $img = $row['product_image'];
 
                 echo'
                     <div class="col-md-4">
