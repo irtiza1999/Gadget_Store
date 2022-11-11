@@ -62,7 +62,17 @@
                             <div class="step"> <span class="icon"> <i class="fa fa-times"></i> </span> <span class="text">
                             Not Paid</span> </div>';
                 }else{
-                    if($order_status == "on the way"){
+                    if($order_status=="Not Delivered"){
+                        echo'<div class="step active"> <span class="icon"> <i class="fa fa-money"></i> </span> <span class="text">
+                                Paid</span> </div>
+                            <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
+                            class="text">Order confirmed</span> </div>
+                            <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">
+                            Picked by the Delivery man</span> </div>
+                            <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
+                            class="text">Delivered</span> </div>';
+                    }
+                    else if($order_status == "on the way"){
                         echo'
                             <div class="step active"> <span class="icon"> <i class="fa fa-money"></i> </span> <span class="text">
                                 Paid</span> </div>
@@ -73,7 +83,8 @@
                             <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span
                             class="text">Delivered</span> </div>
                         ';
-                    }elseif($order_status == "complete"){
+                    
+                    }elseif($order_status == "Complete"){
                     echo'
                     <div class="step active"> <span class="icon"> <i class="fa fa-money"></i> </span> <span class="text">
                     Paid</span> </div>
