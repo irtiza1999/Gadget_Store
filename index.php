@@ -15,6 +15,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
+        integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
 
 </head>
@@ -45,21 +48,69 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
     }}
-    ?>
+    echo'
     <div class="container">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repellendus,
-            alias quos atque excepturi magni quo et adipisci,
-            quisquam optio harum cum ex tenetur laborum ! Nemo expedita culpa atque. Sunt dolore dignissimos odio
-            recusandae,
-            sed cum tenetur odit voluptate aliquam modi harum,
-            magni vel expedita facilis ! Natus doloribus dolore facere. </p>
-    </div>
-    <div class="container">
-        <div class="row">
-            <h3 class="text-center">New Products</h3>
-            <div class="container d-flex justify-content-center mt-50 mb-50">
+    <h3 class="text-center" style="margin-top: 50px; margin-bottom: 50px">Recently Added Products</h3>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner d-flex justify-content-around" style="background: rgba(0,0,0,.125)">
+        ';
+        $caraouselSql = "SELECT * FROM `products` ORDER BY `product_id` DESC LIMIT 3";
+        $caraouselResult = mysqli_query($conn, $caraouselSql);
+        $count = 0;
+        while($caraouselRow = mysqli_fetch_assoc($caraouselResult)){
+            $caraouselImg = $caraouselRow['product_image'];
+            $caraouselName = $caraouselRow['product_name'];
+            $caraouselPrice = $caraouselRow['product_price'];
+            $carouselId = $caraouselRow['product_id'];
+            if($count==0){
+                echo'
+            <div class="carousel-item active" style="padding: 20px; margin-bottom: 10px">
                 <div class="row">
-                    <?php ini_set('display_errors', '1');
+             <div class="col-md-6">
+             <a href="/store/productPage.php?productId='.$carouselId.'">
+                    <img class="" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <h5 style="color: black; text-align: center">'.$caraouselName.'</h5>
+            </a>
+             </div>
+            </div>
+            </div>';
+            }else{
+                echo'
+            <div class="carousel-item" style="padding: 20px; margin-bottom: 10px">
+             <div class="row">
+             <div class="col-md-6">
+             <a href="/store/productPage.php?productId='.$carouselId.'">
+                    <img class="" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <h5 style="color: black; text-align: center">'.$caraouselName.'</h5>
+            </a>
+             </div>
+            </div>
+            </div>';
+            }
+            $count++;
+            
+        }
+        echo'</div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>';
+    ?>
+    <div class="row" style="padding-top: 90px; margin-bottom: 50px">
+        <h3 class="text-center" style="margin-bottom: 50px">All Products</h3>
+        <div class="container d-flex justify-content-center mt-50 mb-50">
+            <div class="row">
+                <?php ini_set('display_errors', '1');
     $script   = $_SERVER['SCRIPT_NAME'];
     $sql="SELECT * FROM `products`";
     $result=mysqli_query($conn, $sql);
@@ -71,13 +122,28 @@
         $img=$row['product_image'];
         $price = $row['product_price'];
         $category = $row['product_category'];
-        echo'
         
-           <div class="col-md-4 mt-2">
-                <div class="card">
+
+        $tempSql = "SELECT rating FROM `comments` WHERE commented_for = $id";
+        $tempResult = mysqli_query($conn, $tempSql);
+        $totalRating = 0;
+        $count = 0;
+        $rating=0;
+        while ($tempRow = mysqli_fetch_assoc($tempResult)) {
+            $totalRating += $tempRow['rating'];
+            $count++;
+        }
+        if($count==0){
+            $rating = 0;
+        }else{
+            $rating = $totalRating/$count;
+        }
+        echo'
+           <div class="col-md-3 mt-2">
+                <div class="card" style="height: 500px">
                                     <div class="card-body">
-                                        <div class="card-img-actions">
-                                                <img src="'.$img.'" class="card-img img-fluid" alt="">
+                                        <div class="card">
+                                                <a href="/store/productPage.php?productId='.$id.'"><img src="'.$img.'" class="" style="height: 250px; width: 200px"></a>
                                         </div>
                                     </div>
                                     <div class="card-body bg-light text-center">
@@ -86,8 +152,15 @@
                                                 <a href="/store/productPage.php?productId='.$id.'" data-abc="true">'.$name.'</a>
                                             </h6>
                                             <a href="/store/categoryPage.php?cat='.$category.'" class="text-muted" data-abc="true">'.strtoupper($category).'</a>
-                                        </div>
-                                        <h3 class="mb-0 font-weight-semibold">$'.$price.'</h3>
+                                        </div>';
+                                        $temp = floor(5-$rating);
+                                        for($i=0; $i<$rating; $i++){
+                                            echo '<span>⭐</span>';
+                                        }
+                                        for($i=0; $i<$temp; $i++){
+                                            echo '<span class="fa fa-star"></span>';
+                                        }
+                                        echo'<h3 class="mb-0 font-weight-semibold">$'. $price.'</h3>
                                         <form action="partials/_addToCart.php" method="post">
                                             <input type="hidden" name="id" id="id" value='.$id.'>
                                             <input type="hidden" name="script" id="script" value='. $script.'>
@@ -95,28 +168,38 @@
                                             <button type="submit" class="bg-cart btn btn-success"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
                                         </form>
                                     </div>
-                                </div>                             
+                                </div>                    
            </div> 
+           
+           
 ';}
 
 
 ?>
 
-                </div>
             </div>
-            <?php include 'partials/_footer.php'?>
-            <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
-            </script>
-            <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-                crossorigin="anonymous">
-            </script>
-            <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
-            </script>
+        </div>
+        <?php include 'partials/_footer.php'?>
+        <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
+        </script>
+        <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+        </script>
+        <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>
