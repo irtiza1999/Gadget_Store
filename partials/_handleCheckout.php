@@ -22,8 +22,8 @@
             $payment = $_POST["exampleRadios"];
         if($payment=='cod'){
             $paymentMethod = "cod";
-        }else{
-            $paymentMethod = "paypal";
+        }else if($payment=='stripe'){
+            $paymentMethod = "stripe";
         }}
         
         $userId = $_POST["userId"];
@@ -31,10 +31,16 @@
         $insert_data = implode(",", $arr);
         $insert_data = json_encode($arr);
         $bill= $_SESSION['bill'];
-        $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', '$paymentMethod')";
+        $sql = "";
+        if($paymentMethod == "stripe"){
+            $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`,`payment_status`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', 'paid','$paymentMethod')";
+        }else{
+            $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', '$paymentMethod')";
+        }
         $result = mysqli_query($conn,$sql);
         if($result){
             unset($_SESSION['cart']);
+            unset($_SESSION['stipePay']);
             header("Location: /store/index.php?orderPlaced=true");
         }
         else{

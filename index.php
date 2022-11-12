@@ -73,8 +73,8 @@
                 <div class="row">
              <div class="col-md-6">
              <a href="/store/productPage.php?productId='.$carouselId.'">
-                    <img class="" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
-                    <h5 style="color: black; text-align: center">'.$caraouselName.'</h5>
+                    <img class="rounded" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <h5 style="color: blue; text-align: center; margin-top: 10px">'.$caraouselName.'</h5>
             </a>
              </div>
             </div>
@@ -85,8 +85,8 @@
              <div class="row">
              <div class="col-md-6">
              <a href="/store/productPage.php?productId='.$carouselId.'">
-                    <img class="" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
-                    <h5 style="color: black; text-align: center">'.$caraouselName.'</h5>
+                    <img class="rounded" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <h5 style="color: blue; text-align: center; margin-top: 10px">'.$caraouselName.'</h5>
             </a>
              </div>
             </div>
