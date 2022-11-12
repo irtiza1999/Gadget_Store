@@ -69,6 +69,20 @@
         $price = $row['product_price'];
         $img = $row['product_image'];
         $stock = $row['product_stock'];
+        $tempSql = "SELECT rating FROM `comments` WHERE commented_for = $id";
+        $tempResult = mysqli_query($conn, $tempSql);
+        $totalRating = 0;
+        $count = 0;
+        $rating=0;
+        while ($tempRow = mysqli_fetch_assoc($tempResult)) {
+            $totalRating += $tempRow['rating'];
+            $count++;
+        }
+        if($count==0){
+            $rating = 0;
+        }else{
+            $rating = $totalRating/$count;
+        }
     }
     echo'
     <div class="container" id="productPage">
@@ -86,6 +100,18 @@
                     <b>Quick overview</b><br />
                     '.$desc.'
                 </p>
+                <hr>
+                <div class="d-flex justify-content-around">
+                <p class="text-justify font-weight-light">Rating</p>
+                ';
+                    $temp = 5-$rating;
+                            for($i=0; $i<$rating; $i++){
+                                echo '<span class="fa fa-star checked"></span>';
+                            }
+                            for($i=0; $i<$temp; $i++){
+                                echo '<span class="fa fa-star"></span>';
+                            }
+                echo'</div>
                 <p class="product-price">
                     <b>Price:</b>
                     <span class="old-price">$499</span>
@@ -124,9 +150,20 @@
 
     echo '</div>
     </div>
-    <br clear="all" />
+    <br clear="all" />';
+    if(!isset($_SESSION['loggedIn'])){
+        echo '
+                <div class="jumbotron">
+                <p class="display-4">Login to comment</p>
+                <p class="lead">Login to comment and rate this product.</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-lg" href="/store/login.php" role="button">Login</a>
+                </div>';
+    }
+    else{
+    echo'
     <div class="product-container" style="margin-top: 10px;padding: 10px;">
-            <h4 class="product-page text-dark">Comments</h4>';
+            <h4 class="product-page text-dark" style="margin-bottom: 20px">Add your comment and Rating</h4>';
             $sql = "SELECT * FROM `comments` WHERE commented_for = $id";
             $result = mysqli_query($conn, $sql);
             $num = mysqli_num_rows($result);
@@ -154,9 +191,9 @@
                 ';
             }else{
                 $userId = $_SESSION['user_id'];
-                $sql = "SELECT * FROM `comments` WHERE commented_by = $userId";
-                $result3 = mysqli_query($conn, $sql);
-                $numOfRows = mysqli_num_rows($result);
+                $sql3 = "SELECT * FROM `comments` WHERE commented_by = $userId and commented_for = $id";
+                $result3 = mysqli_query($conn, $sql3);
+                $numOfRows = mysqli_num_rows($result3);
                 if($numOfRows==0){
                 echo'
                 <div class="jumbotron d-flex flex-column">
@@ -178,12 +215,21 @@
                 <textarea class="form-control" name="comment" id="comment" placeholder="Write your comment here"></textarea>
                 <button class="btn btn-success" style="margin-top: 10px;">Submit</button>
                 </form>
-                </div>';}
+                </div>
+                </div>
+                ';}
                 else{
                     echo '<div class="jumbotron">
-                <p class="display-6">Sorry you are only eligible for commenting and rating a product once.</p>';
+                <p class="display-6">Sorry you are only eligible for commenting and rating a product once.</p>
+                </div>';
+                
+                }}}
+                $sql = "SELECT * FROM `comments` WHERE commented_for = $id";
+                $result = mysqli_query($conn, $sql);
+                $num = mysqli_num_rows($result);
+                if($num != 0){
+                    echo '<p class="display-6">Comments and Ratings</p>';
                 }
-                echo'</div>';
                 while($row = mysqli_fetch_assoc($result)){
                     $comment = $row['comment_content'];
                     $commented_by = $row['commented_by'];
@@ -215,7 +261,7 @@
                         </div>
                 ';    
                 }
-            }
+            
             echo'
     </div>
     <br clear="all" />
