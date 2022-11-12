@@ -29,7 +29,7 @@
         if($_GET['orderPlaced']=='true'){
          echo '
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Your order has been placed successfully.
+                <strong>Success!</strong> Your order has been placed successfully. Track your order from <strong><a href="/store/userProfile.php">here</a>.</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
     }else{
@@ -51,7 +51,7 @@
     echo'
     <div class="container">
     <h3 class="text-center" style="margin-top: 50px; margin-bottom: 50px">Recently Added Products</h3>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

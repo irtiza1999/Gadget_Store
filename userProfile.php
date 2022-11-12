@@ -102,7 +102,7 @@
                         </tr>
                     </thead>
                     <tbody>';
-                    $sql = "SELECT * FROM `orders` WHERE order_user_id = $userId";
+                    $sql = "SELECT * FROM `orders` WHERE order_user_id = $userId ORDER BY order_time DESC";
                     $result = mysqli_query($conn, $sql);
                     $num = mysqli_num_rows($result);
                     if ($num>0){

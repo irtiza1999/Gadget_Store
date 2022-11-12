@@ -114,7 +114,6 @@
                 echo'</div>
                 <p class="product-price">
                     <b>Price:</b>
-                    <span class="old-price">$499</span>
                     <span class="price">$'.$price.'</span>';
                     if($stock == 0){
                         echo '<span class="product-price-meta" style="float:right;">

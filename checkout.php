@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <hr class="mb-4">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm Order</button>
                         </form>
                     </div>
                 </div>';
@@ -124,13 +124,6 @@
         }
         
     }
-     echo'<li class="list-group-item d-flex justify-content-between bg-light">
-            <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">-$5</span>
-        </li>';
         $ship = ($bill*0.1);
         if($bill<500){
             $bill += $ship;
@@ -155,16 +148,6 @@
             echo'<strong>$'.$bill.'</strong>
         </li>
     </ul>
-    <form class="card p-2">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Promo code" aria-label="Recipients username"
-                aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Redeem</button>
-            </div>
-            </div>
-        </div>
-    </form>
     </div>
     </div>
     </div>
