@@ -57,7 +57,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner d-flex justify-content-around" style="background: rgba(0,0,0,.125)">
+        <div class="carousel-inner d-flex justify-content-around" style="background: #C8D0D8;">
         ';
         $caraouselSql = "SELECT * FROM `products` ORDER BY `product_id` DESC LIMIT 3";
         $caraouselResult = mysqli_query($conn, $caraouselSql);

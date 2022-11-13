@@ -37,6 +37,10 @@ i {
     margin-left: -15px;
 }
 
+button {
+    margin-top: 15px;
+}
+
 .card {
     background: white;
     padding: 60px;
@@ -53,8 +57,9 @@ i {
             <i class="checkmark">✓</i>
         </div>
         <h1>Success</h1>
-        <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
-        <a href="/store/checkout.php"><button class="btn btn-success" type="submit">Confirm Order</button></a>
+        <p>We have received your payment</p>
+        <a href="/store/checkout.php"><button class="btn btn-success" type="submit">Proceed to
+                checkout</button></a>
     </div>
 </body>
 
