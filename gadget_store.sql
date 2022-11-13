@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2022 at 05:14 PM
+-- Generation Time: Nov 13, 2022 at 05:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -73,30 +73,19 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `order_user_id`, `cart`, `bill`, `order_status`, `payment_status`, `payment_method`, `order_time`) VALUES
-(26, 16, '{\"10\":\"1\",\"2\":\"1\"}', 421, 'Complete', 'Paid', 'cod', '2022-11-04 12:39:40'),
-(27, 16, '{\"11\":\"1\"}', 396, 'on the way', 'Paid', 'cod', '2022-11-04 12:50:00'),
-(30, 16, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Not Paid', 'cod', '2022-11-05 22:10:50'),
-(31, 16, '{\"1\":\"1\",\"11\":\"1\",\"3\":\"1\"}', 2259, 'Not Delivered', 'Not Paid', 'cod', '2022-11-05 22:12:22'),
-(32, 16, '{\"11\":\"1\"}', 396, 'Complete', 'Paid', 'cod', '2022-11-05 23:20:54'),
 (33, 21, '{\"2\":\"2\",\"11\":\"1\"}', 860, 'Complete', 'Paid', 'cod', '2022-11-07 20:13:56'),
-(34, 21, '{\"2\":\"2\",\"1\":\"1\",\"10\":\"1\",\"11\":\"1\",\"3\":\"1\",\"12\":\"1\"}', 3347, 'Not Delivered', 'Not Paid', 'cod', '2022-11-12 22:05:58');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `transaction_id` varchar(50) NOT NULL,
-  `payment_amount` float NOT NULL,
-  `currency_code` varchar(5) NOT NULL,
-  `payment_status` varchar(50) NOT NULL,
-  `invoice_id` varchar(50) NOT NULL,
-  `payment_time` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(42, 16, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Not Paid', 'cod', '2022-11-13 03:56:10'),
+(50, 21, '{\"12\":\"1\"}', 501, 'Not Delivered', 'Not Paid', 'stripe', '2022-11-13 17:24:40'),
+(51, 21, '{\"12\":\"1\"}', 501, 'Not Delivered', 'Not Paid', 'stripe', '2022-11-13 17:26:07'),
+(52, 21, '{\"12\":\"1\"}', 501, 'Not Delivered', 'Not Paid', 'stripe', '2022-11-13 17:28:02'),
+(53, 21, '{\"12\":\"1\"}', 501, 'Not Delivered', 'Not Paid', 'stripe', '2022-11-13 17:32:16'),
+(54, 21, '{\"2\":\"1\"}', 275, 'Not Delivered', 'Paid', 'stripe', '2022-11-13 17:42:31'),
+(55, 21, '{\"2\":\"1\",\"10\":\"1\"}', 422, 'Not Delivered', 'Not Paid', 'cod', '2022-11-13 17:43:00'),
+(57, 16, '{\"2\":\"1\"}', 275, 'Not Delivered', 'Not Paid', 'cod', '2022-11-13 18:20:21'),
+(58, 16, '{\"1\":\"1\"}', 1300, 'Not Delivered', 'Paid', 'stripe', '2022-11-13 18:21:44'),
+(59, 16, '{\"10\":\"13\"}', 1729, 'Not Delivered', 'Paid', 'stripe', '2022-11-13 18:30:24'),
+(60, 16, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Not Paid', 'cod', '2022-11-13 18:40:06'),
+(61, 21, '{\"1\":\"1\"}', 1300, 'Not Delivered', 'Paid', 'stripe', '2022-11-13 18:55:25');
 
 -- --------------------------------------------------------
 
@@ -172,12 +161,6 @@ ALTER TABLE `orders`
   ADD KEY `order_user_id` (`order_user_id`);
 
 --
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -205,13 +188,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `products`

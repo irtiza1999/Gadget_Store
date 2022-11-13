@@ -37,7 +37,7 @@
                 $userPhone = $_POST['newPhone'];
                 $password = $_POST['password'];
                 $userAddress = $_POST['newAddress'];
-                if($userPass == $password){
+                if(password_verify($password, $userPass)){
                     $sql = "UPDATE `users` SET `user_name` = '$userName', `user_email` = '$userEmail', `user_phone_no` = '$userPhone', `user_address` = '$userAddress' WHERE `user_id` = $userId";
                 $result = mysqli_query($conn, $sql);
                 if($result){
@@ -78,11 +78,11 @@
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" name="newPhone" value="'.$userPhone.'"
                                     class="form-control" placeholder="Enter phone number" value=""></div>
-                            <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" name="newAddress" value="'.$userAddress.'"
+                            <div class="col-md-12"><label class="labels">Address</label><input type="text" name="newAddress" value="'.$userAddress.'"
                                     class="form-control" placeholder="Enter address" value=""></div>
                             <div class="col-md-12"><label class="labels">Email ID</label><input type="email" name="newEmail" value="'.$userEmail.'"
                                     class="form-control" placeholder="enter email id" value=""></div>
-                            <div class="col-md-12"><label class="labels">Password</label><input type="text"
+                            <div class="col-md-12"><label class="labels">Password</label><input type="password"
                                     class="form-control" placeholder="Enter Your Password" name="password"></div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save
