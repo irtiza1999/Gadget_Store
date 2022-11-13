@@ -19,6 +19,7 @@
     if($charge){
       session_start();
       $_SESSION['stipePay'] = true;
+      setcookie('paidBill', $amount *100, time() + (86400 * 30), "/");
       header("Location:/store/success.php?payment=success");
     }else{
       header("Location:/store/checkout.php?payment=failed");

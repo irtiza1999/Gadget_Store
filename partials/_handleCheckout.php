@@ -30,10 +30,11 @@
         $arr = $_SESSION["cart"];
         $insert_data = implode(",", $arr);
         $insert_data = json_encode($arr);
-        $bill= $_SESSION['bill'];
+        $bill= ceil($_SESSION['bill']);
         $sql = "";
-        if($paymentMethod == "stripe"){
-            $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`,`payment_status`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', 'paid','$paymentMethod')";
+        $paid = ceil($_COOKIE['paidBill']/1000);
+        if($paymentMethod == 'stripe'){
+            $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`,`payment_status`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', 'Paid','$paymentMethod')";
         }else{
             $sql = "INSERT INTO `orders` (`order_user_id`, `cart`,`bill`, `payment_method`) VALUES ('$userId', '$insert_data','$bill', '$paymentMethod')";
         }
@@ -41,6 +42,7 @@
         if($result){
             unset($_SESSION['cart']);
             unset($_SESSION['stipePay']);
+            unset($_COOKIE['paidBill']);
             header("Location: /store/index.php?orderPlaced=true");
         }
         else{

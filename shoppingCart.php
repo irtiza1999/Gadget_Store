@@ -174,7 +174,9 @@
         </td>
         <td class="text-right">
             <h3><strong>$'.$bill.'</strong></h3>
-        </td>
+        </td>';
+        $_SESSION['totalBill'] = $bill;
+    echo'
     </tr>
     <tr>
         <td>   </td>
@@ -188,7 +190,7 @@
             </a>
         </td>
         <td>
-        <a href="/store/checkout.php">
+        <a href="/store/selectPayment.php">
             <button type="button" class="btn btn-success">
                 Checkout <span class="glyphicon glyphicon-play"></span>
             </button>

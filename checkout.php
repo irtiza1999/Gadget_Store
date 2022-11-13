@@ -19,6 +19,7 @@
 <body>
     <?php
     ob_start();
+    session_start();
     if(isset($_SESSION['cart']) && count($_SESSION['cart']) == 0){
         header('Location:index.php');
         exit();
@@ -70,23 +71,22 @@
                             <div class="d-block my-3">';
                             if(isset($_SESSION['stipePay']) && $_SESSION['stipePay'] == true){
                                 echo'<input class="form" type="hidden" name="exampleRadios" id="exampleRadios1" value="stripe">';
-                                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Success!</strong> Your payment is successfully done.
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                echo '<div class="alert alert-success alert fade show" role="alert">
+                                <strong>Success!</strong> Your payment is successfully done via Stripe.
                               </div>';
                             }else{
                                 echo'
                                 <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="cod">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="cod" checked> 
                                 <label class="form-check-label" for="exampleRadios1">
                                     Cash On Delivery
                                 </label>
                                 </div>';}
                                 echo'
                             </div>
-                            <hr class="mb-4">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm Order</button>
-                            </form>
+                            <hr class="mb-4">';
+                                echo'<button class="btn btn-primary btn-lg btn-block" type="submit">Confirm Order</button>';                            
+                            echo'</form>
                             </div>
                             </div>';
                             if(isset($_SESSION['cart'])){
@@ -99,7 +99,6 @@
         <h4 class="d-flex justify-content-between align-items-center lh-condensed mb-3">
             <span class="text-muted">Your cart</span>
             <span class="rounded-circle text-muted">'.$cCount.'</span>
-
         </h4>
         <ul class="list-group mb-3 z-depth-1">';
             if(isset($_SESSION['cart'])){
@@ -150,19 +149,6 @@
                         echo'<strong>$'.$bill.'</strong>
                     </li>
         </ul>';
-        if(isset($_SESSION['stipePay']) && $_SESSION['stipePay'] == true){
-            echo'Paid';
-        }else{
-        echo'<form autocomplete="off" action="/store/partials/_checkoutCharge.php" method="POST">
-        <input type="hidden" name="amount" value="'.$bill.'">
-                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
-                                        data-key="pk_test_51HubhJHonQARCwkeqhDsoRgvql1fz9wDOl3tY2LwQ67mYp06UBDvNAJ45pS3Zffa2rIJMt22ATNLieFUq8OzDDfS00IB1GOyfL"
-                                        data-amount="'.$tempBill.'"
-    data-description="Payment for '.$_SESSION['user_name'].'"
-    data-currency="usd"
-    data-locale="auto">
-    </script>
-    </form>';}
     echo'</div>
     </div>
     </div>
