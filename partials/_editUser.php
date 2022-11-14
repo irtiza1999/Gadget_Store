@@ -11,6 +11,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $newAddress = $_POST['newAddress'];
     if(strlen($newCPass)>0){    
         if($newPass == $newCPass){
+            $newPass = password_hash($newPass, PASSWORD_DEFAULT);
             $sql = "UPDATE `users` SET `user_name` = '$newName', `user_email` = '$newMail', `user_pass` = '$newPass',`user_address`='$newAddress' WHERE `user_id` = $user_id";
             $result = mysqli_query($conn, $sql);
             if($result){
