@@ -42,7 +42,7 @@
                 echo'
                     <div class="col-md-4">
                 <div class="card" style="height:570px ;width: 18rem; margin-top: 30px;">
-                    <img src="'.$img.'" class="card-img-top" alt="'.$name.'" height="300" width="300">
+                    <img src="/store/uploads/'.$img.'" class="card-img-top" alt="'.$name.'" height="300" width="300">
                     <div class="card-body">
                         <h5 class="card-title"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h5>
                         <p class="card-text">'.substr($desc,0,200).' ...</p>

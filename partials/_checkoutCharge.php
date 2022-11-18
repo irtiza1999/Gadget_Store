@@ -20,7 +20,7 @@
       session_start();
       $_SESSION['stipePay'] = true;
       setcookie('paidBill', $amount *100, time() + (86400 * 30), "/");
-      header("Location:/store/success.php?payment=success");
+      header("Location:/store/success.php?payment=success&tId='.$charge->id.'");
     }else{
       header("Location:/store/checkout.php?payment=failed");
     }

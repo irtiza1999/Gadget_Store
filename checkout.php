@@ -72,7 +72,8 @@
                             if(isset($_SESSION['stipePay']) && $_SESSION['stipePay'] == true){
                                 echo'<input class="form" type="hidden" name="exampleRadios" id="exampleRadios1" value="stripe">';
                                 echo '<div class="alert alert-success alert fade show" role="alert">
-                                <strong>Success!</strong> Your payment is successfully done via Stripe.
+                                <strong>Success!</strong> Your payment is successfully done via Stripe.<br>
+                                <strong>Transaction ID:</strong> '.$_GET['tId'].'
                               </div>';
                             }else{
                                 echo'

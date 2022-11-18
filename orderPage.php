@@ -50,6 +50,7 @@
                         <div class="col"> <strong>Address:</strong> <br>'.$order_user_address.' </div>
                         <div class="col"> <i class="fa fa-phone"></i> <strong>Phone No:</strong> 
                             '.$order_user_phone.' </div>
+                        <div class="col"> <strong>Payment Method:</strong> <br> '.strtoupper($order_payment_method).' </div>
                         <div class="col"> <strong>Payment Status:</strong> <br> '.strtoupper($order_payment_status).' </div>
                         <div class="col"> <strong>Status:</strong> <br> '.strtoupper($order_status).' </div>
                         <div class="col"> <strong>Delivery Man: </strong>name <br> <i class="fa fa-phone"></i> <strong>Phone No:</strong> 
@@ -123,7 +124,7 @@
                 echo'
                     <li class="col-md-4">
                         <figure class="itemside mb-3">
-                            <div class="aside"><img src="'.$product_image.'" class="img-sm border"></div>
+                            <div class="aside"><img src="/store/uploads/'.$product_image.'" class="img-sm border"></div>
                             <figcaption class="info align-self-center">
                                 <p class="title">'.$product_name.'</p> <span
                                     class="text-muted">$'.$product_price.' X '.$quan.' = $'.$product_price * $quan.' </span>

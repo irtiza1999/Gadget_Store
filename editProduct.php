@@ -34,24 +34,41 @@
         $newCategory = $_POST["newCategory"];
         $newPrice = $_POST["newPrice"];
         $newDescription = $_POST["newDesc"];
-        $newImage = $_POST["newImage"];
         $newStock = $_POST["newStock"];
         $id = $_POST["id"];
-        $sql = "UPDATE `products` SET `product_name` = '$newName', `product_category` = '$newCategory', `product_price` = '$newPrice', `product_description` = '$newDescription', `product_image` = '$newImage', `product_stock` = '$newStock' WHERE `products`.`product_id` = $id";
-        $result = mysqli_query($conn, $sql);
-        if($result){
-            header("Location: /store/manageProduct.php?edit=true");
-            exit();
-        
-    }else{
-        header("Location: /store/manageProduct.php?edit=false");
-        exit();
-    }
-    }
+
+        if(isset($_FILES['image'])){
+            $img_name = $_FILES['image']['name'];
+            $img_size = $_FILES['image']['size'];
+            $tmp_name = $_FILES['image']['tmp_name'];
+            $error = $_FILES['image']['error'];
+		if ($error === 0 && $img_size > 125000) {
+		    header("Location: /store/manageProduct.php?add=false1");
+		}else{
+			$img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+			$img_ex_lc = strtolower($img_ex);
+			$allowed_exs = array("jpg", "jpeg", "png"); 
+			if(in_array($img_ex_lc, $allowed_exs)){
+				$new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+				$img_upload_path = 'uploads/'.$new_img_name;
+				move_uploaded_file($tmp_name, $img_upload_path);
+				// Insert into Database
+                $sql = "UPDATE `products` SET `product_name` = '$newName', `product_category` = '$newCategory', `product_price` = '$newPrice', `product_description` = '$newDescription', `product_image` = '$new_img_name', `product_stock` = '$newStock' WHERE `products`.`product_id` = $id";
+                $result = mysqli_query($conn, $sql);
+				header("Location: /store/manageProduct.php?edit=true");
+			}else {
+				$sql = "UPDATE `products` SET `product_name` = '$newName', `product_category` = '$newCategory', `product_price` = '$newPrice', `product_description` = '$newDescription', `product_stock` = '$newStock' WHERE `products`.`product_id` = $id";
+                $result = mysqli_query($conn, $sql);
+                if($result){
+                header("Location: /store/manageProduct.php?edit=true");}
+			}
+		}
+	}
+}
     echo'
     <div class="container">
         <h1 class="text-center">Edit Product</h1>
-        <form action="'.$_SERVER["PHP_SELF"].'" method="post">
+        <form action="'.$_SERVER["PHP_SELF"].'" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="userName" class="form-label">Product Name</label>
                 <input type="text" class="form-control" name="newName" value="'.$name.'" aria-describedby="userName"
@@ -78,8 +95,7 @@
                     aria-describedby="emailHelp" required>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Image</label>
-                <input type="text" class="form-control" name="newImage" value="'.$image.'"
-                    aria-describedby="emailHelp" required>
+                <input class="form-control" type="file" name="image"  id="formFileMultiple">
             </div>
             <input type="hidden" name="id" value="'.$id.'">
             <button type="submit" class="btn btn-success mt-3">Confirm</button>

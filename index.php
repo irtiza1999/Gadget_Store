@@ -73,7 +73,7 @@
                 <div class="row">
              <div class="col-md-6">
              <a href="/store/productPage.php?productId='.$carouselId.'">
-                    <img class="rounded" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <img class="rounded" src="/store/uploads/'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
                     <h5 style="color: blue; text-align: center; margin-top: 10px">'.$caraouselName.'</h5>
             </a>
              </div>
@@ -85,7 +85,7 @@
              <div class="row">
              <div class="col-md-6">
              <a href="/store/productPage.php?productId='.$carouselId.'">
-                    <img class="rounded" src="'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
+                    <img class="rounded" src="/store/uploads/'.$caraouselImg.'" alt="" style="height: 500px; width: 398px;display: block;margin-left: auto;margin-right: auto">
                     <h5 style="color: blue; text-align: center; margin-top: 10px">'.$caraouselName.'</h5>
             </a>
              </div>
@@ -143,7 +143,7 @@
                 <div class="card" style="height: 500px">
                                     <div class="card-body">
                                         <div class="card">
-                                                <a href="/store/productPage.php?productId='.$id.'"><img src="'.$img.'" class="" style="height: 250px; width: 200px"></a>
+                                                <a href="/store/productPage.php?productId='.$id.'"><img src="/store/uploads/'.$img.'" class="" style="height: 250px; width: 200px"></a>
                                         </div>
                                     </div>
                                     <div class="card-body bg-light text-center">
@@ -199,6 +199,12 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a33530bb41.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
         </script>
 </body>
 

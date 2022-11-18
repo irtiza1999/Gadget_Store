@@ -104,7 +104,7 @@
                 <div class="media">
                 
                 <a class="thumbnail pull-lef" href="#"> <img class="media-object"
-                        src="'.$image.'"
+                        src="/store/uploads/'.$image.'"
                         style="width: 72px; height: 72px;"> </a>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="/store/productPage.php?productId='.$i.'">'.$name.'</a></h4>

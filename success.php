@@ -52,14 +52,21 @@ button {
 </style>
 
 <body>
+    <?php
+    session_start();
+    ?>
     <div class="card">
         <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
             <i class="checkmark">✓</i>
         </div>
         <h1>Success</h1>
         <p>We have received your payment</p>
-        <a href="/store/checkout.php"><button class="btn btn-success" type="submit">Proceed to
-                checkout</button></a>
+        <p>Transaction ID: <?php echo str_replace("'","",$_GET['tId']); ?></p>
+        <?php
+        echo'
+        <a href="/store/checkout.php?tId='.str_replace("'","",$_GET['tId']).'"><button class="btn btn-success" type="submit">Proceed to
+                checkout</button></a>';
+        ?>
     </div>
 </body>
 

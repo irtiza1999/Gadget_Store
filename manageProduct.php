@@ -96,7 +96,7 @@
                 <td class="">
                 <div class="media">
                 <a class="thumbnail pull-lef" href="#"> <img class="media-object"
-                        src="'.$image.'"
+                        src="/store/uploads/'.$image.'"
                         style="width: 72px; height: 72px;"> </a>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="/store/productPage.php?productId='.$id.'">'.$name.'</a></h4>
@@ -110,7 +110,7 @@
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="name" value="'.$name.'">
                         <input type="hidden" name="price" value="'.$price.'">
-                        <input type="hidden" name="image" value="'.$image.'">
+                        <input type="hidden" name="image" value="/store/uploads/'.$image.'">
                         <input type="hidden" name="stock" value="'.$stock.'">
                         <input type="hidden" name="desc" value="'.$desc.'">
                         <input type="hidden" name="category" value="'.$category.'">

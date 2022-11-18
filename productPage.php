@@ -88,7 +88,7 @@
     <div class="container" id="productPage">
         <div class="product-container main-product-container">
             <div class="product-left-container">
-                <img src="'.$img.'"
+                <img src="/store/uploads/'.$img.'"
                     alt="'.$name.'" height="407" width="400" />
             </div>
             <div class="product-col-container">

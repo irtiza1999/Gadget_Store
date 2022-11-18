@@ -7,9 +7,9 @@
     $params = $_POST["params"];
 
     if($result){
-        header("Location: $script?$params&delete=true");
+        header("Location: /store/manageProduct.php?delete=true");
     }
     else{
-        header("Location: $script?$params&delete=false");
+        header("Location: /store/manageProduct.php?delete=false");
     }
 ?>

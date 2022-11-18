@@ -24,20 +24,42 @@
         $category = $_POST["category"];
         $price = $_POST["price"];
         $description = $_POST["desc"];
-        $image = $_POST["image"];
         $stock = $_POST["stock"];
-        $sql = "INSERT INTO `products` (`product_name`, `product_category`, `product_price`, `product_description`, `product_image`, `product_stock`) VALUES ('$name', '$category', '$price', '$description', '$image', '$stock')";
-        $result = mysqli_query($conn, $sql);
-        if($result){
-            header("Location: /store/manageProduct.php?add=true");
-        }
-          else{
-            header("Location: /store/manageProduct.php?add=false");
-          }}
+        // $image = $_POST["image"];
+
+        
+        $img_name = $_FILES['image']['name'];
+        $img_size = $_FILES['image']['size'];
+        $tmp_name = $_FILES['image']['tmp_name'];
+        $error = $_FILES['image']['error'];
+
+        if ($error === 0) {
+		if ($img_size > 125000) {
+		    header("Location: /store/manageProduct.php?add=false");
+		}else {
+			$img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+			$img_ex_lc = strtolower($img_ex);
+			$allowed_exs = array("jpg", "jpeg", "png"); 
+			if (in_array($img_ex_lc, $allowed_exs)) {
+				$new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+				$img_upload_path = 'uploads/'.$new_img_name;
+				move_uploaded_file($tmp_name, $img_upload_path);
+				// Insert into Database
+                $sql = "INSERT INTO `products` (`product_name`, `product_category`, `product_price`, `product_description`, `product_image`, `product_stock`) VALUES ('$name', '$category', '$price', '$description', '$new_img_name', '$stock')";
+                $result = mysqli_query($conn, $sql);
+				header("Location: /store/manageProduct.php?add=true");
+			}else {
+				header("Location: /store/manageProduct.php?add=false");
+			}
+		}
+	}else {
+		header("Location: /store/manageProduct.php?add=false");
+	}
+}
     echo'
     <div class="container">
         <h1 class="text-center">Add Product</h1>
-        <form action="'.$_SERVER["PHP_SELF"].'" method="post">
+        <form action="'.$_SERVER["PHP_SELF"].'" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="userName" class="form-label">Product Name</label>
                 <input type="text" class="form-control" name="name" aria-describedby="userName"
@@ -62,10 +84,9 @@
                 <label for="signupEmail" class="form-label">Stock</label>
                 <input type="text" class="form-control" name="stock"
                     aria-describedby="emailHelp" required>
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
                 <label for="signupEmail" class="form-label">Image</label>
-                <input type="text" class="form-control" name="image"
-                    aria-describedby="emailHelp" required>
+                 <input class="form-control" type="file" name="image"  id="formFileMultiple">
             </div>
             <button type="submit" class="btn btn-success mt-3">Confirm</button>
         </form>
