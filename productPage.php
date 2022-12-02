@@ -218,8 +218,8 @@
                 </div>
                 ';}
                 else{
-                    echo '<div class="jumbotron">
-                <p class="display-6">Sorry you are only eligible for commenting and rating a product once.</p>
+                    echo '<div class="jumbotron" style="height: 100px">
+                <span class="display-7">Sorry you are only eligible for commenting and rating a product once.</span>
                 </div>';
                 
                 }}}
