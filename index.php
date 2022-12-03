@@ -122,6 +122,7 @@
         $img=$row['product_image'];
         $price = $row['product_price'];
         $category = $row['product_category'];
+        $stock = $row['product_stock'];
         
 
         $tempSql = "SELECT rating FROM `comments` WHERE commented_for = $id";
@@ -160,13 +161,19 @@
                                         for($i=0; $i<$temp; $i++){
                                             echo '<span class="fa fa-star"></span>';
                                         }
-                                        echo'<h3 class="mb-0 font-weight-semibold">$'. $price.'</h3>
+                                        echo'<h3 class="mb-0 font-weight-semibold">$'. $price.'</h3>';
+                                        if($stock==0){
+                                            echo'<p class="text-danger">Out of Stock</p>';}
+                                        else{
+                                            echo'
                                         <form action="partials/_addToCart.php" method="post">
                                             <input type="hidden" name="id" id="id" value='.$id.'>
                                             <input type="hidden" name="script" id="script" value='. $script.'>
                                             <input type="hidden" name="quan" id="quan" value=1>
                                             <button type="submit" class="bg-cart btn btn-success"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
-                                        </form>
+                                        </form>';
+                                    }
+                                    echo'
                                     </div>
                                 </div>                    
            </div> 

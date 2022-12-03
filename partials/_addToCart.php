@@ -26,8 +26,7 @@ if(!(isset($_SESSION["cart"]))){
             $temp = $_POST["id"];
             header("Location: $script?$params&err=True");
             exit();
-        }
-        
+        }   
     }
 $script = $_POST["script"];
 $params = $_POST["params"];

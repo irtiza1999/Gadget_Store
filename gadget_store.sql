@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2022 at 05:42 PM
+-- Generation Time: Dec 02, 2022 at 05:39 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,11 +46,12 @@ INSERT INTO `comments` (`comment_id`, `comment_content`, `commented_by`, `commen
 (29, 'yo', 21, 1, '1', '2022-11-12 13:37:58'),
 (30, 'dasdasd', 21, 2, '2', '2022-11-12 13:54:36'),
 (31, 'Hey', 21, 3, '2', '2022-11-12 14:06:03'),
-(32, 'Good', 28, 2, '5', '2022-11-12 14:06:45'),
 (33, 'Good', 21, 12, '3', '2022-11-12 21:58:04'),
 (34, 'Very Good', 21, 11, '5', '2022-11-12 21:59:20'),
 (36, 'd', 21, 10, '3', '2022-11-12 22:02:43'),
-(37, 'ff', 16, 3, '4', '2022-11-18 21:29:39');
+(37, 'ff', 16, 3, '4', '2022-11-18 21:29:39'),
+(38, 'OK', 16, 12, '3', '2022-11-27 23:15:53'),
+(39, 'dasdasd', 16, 11, '4', '2022-12-01 21:57:11');
 
 -- --------------------------------------------------------
 
@@ -91,8 +92,11 @@ INSERT INTO `orders` (`order_id`, `order_user_id`, `cart`, `bill`, `order_status
 (63, 16, '{\"2\":\"1\",\"12\":\"3\"}', 1615, 'Not Delivered', 'Paid', 'stripe', '2022-11-14 22:30:35'),
 (64, 21, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Paid', 'stripe', '2022-11-15 21:18:14'),
 (65, 16, '{\"10\":\"1\"}', 147, 'Not Delivered', 'Paid', 'stripe', '2022-11-15 22:16:49'),
-(66, 16, '{\"12\":\"1\",\"10\":\"1\",\"1\":\"1\",\"2\":\"1\",\"3\":\"1\",\"11\":\"2\"}', 3457, 'Not Delivered', 'Not Paid', 'cod', '2022-11-18 20:51:43'),
-(67, 16, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Paid', 'stripe', '2022-11-18 21:30:14');
+(66, 16, '{\"12\":\"1\",\"10\":\"1\",\"1\":\"1\",\"2\":\"1\",\"3\":\"1\",\"11\":\"2\"}', 3457, 'Complete', 'Paid', 'cod', '2022-11-18 20:51:43'),
+(67, 16, '{\"3\":\"1\"}', 599, 'Not Delivered', 'Paid', 'stripe', '2022-11-18 21:30:14'),
+(68, 16, '{\"3\":\"1\",\"12\":\"1\"}', 1599, 'on the way', 'Paid', 'stripe', '2022-11-19 20:39:08'),
+(69, 29, '{\"12\":\"3\",\"2\":\"2\"}', 3500, 'on the way', 'Paid', 'stripe', '2022-11-20 15:42:23'),
+(70, 16, '{\"11\":\"2\",\"2\":\"1\"}', 970, 'Complete', 'Paid', 'stripe', '2022-12-01 21:57:59');
 
 -- --------------------------------------------------------
 
@@ -147,7 +151,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `user_address`, `user_phone_no`, `user_type`, `user_created_timestamp`) VALUES
 (16, 'admin', 'admin@admin.com', '$2y$10$PL4T6qMtdhzh510TOUT5De3VTeKh2gYupfOmbMCoCyY5SXSFM2n6i', 'admin', '1234', 'admin', '2022-10-25 23:17:33'),
 (21, 'irtiza3', 'irtiza@irti.com', '$2y$10$.JOZdZrhpiAULZ6YzvTUQuIBjESbbeRuECf.bdIOUyaqY5XBBjAzK', 'khilgoan mor', '1234', 'user', '2022-11-03 15:55:27'),
-(28, 'new', 'new@new.com', '$2y$10$l.gWlb/9XmqrCTVWDQA.deS74IyEJWttIMBw6oYG8JkVVxSbwsOii', 'dasdasd', '1234', 'user', '2022-11-06 19:46:09');
+(29, 'temp', 'temp@temp.com', '$2y$10$vDyQT2XTtoJ22uL36uVjVuNfEmI8h79U.JqyWK1XdpE4mORuIYX42', 'malibag', '014444444', 'user', '2022-11-20 15:41:47');
 
 --
 -- Indexes for dumped tables
@@ -189,13 +193,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -207,7 +211,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables

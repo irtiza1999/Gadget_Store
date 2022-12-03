@@ -68,7 +68,7 @@
                         $curUserName = $_SESSION['user_name'];
                         $curUserId = $_SESSION['user_id'];
                     echo'
-                    <li id="drop"><a style="margin-left: 5px; padding-top: 7px" class="s1">'.$curUserName.' <i class="fa fa-chevron-down"></i></a></a>
+                    <li id="drop"><a style="margin-left: 5px; padding-top: 7px" class="s1">'.strtoupper($curUserName).' <i class="fa fa-chevron-down"></i></a></a>
                     <ul>
                         <li class="nav-item"><a  class="nav-link s1" href="/store/userProfile.php">User Profile</a></li>
                         <li class="nav-item"><a  class="nav-link s1" href="/store/changePassword.php">Change Password</a></li>

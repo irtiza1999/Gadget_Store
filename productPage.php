@@ -22,12 +22,26 @@
 
 <body>
     <?php
+    session_start();
+    include 'partials/_dbconnect.php';
+    if(isset($_POST['requestId'])){
+        $requestId = $_POST['requestId'];
+        $requestId = (int)$requestId;
+        $script = $_POST["script"];
+        $params = $_POST["params"];
+        $user = $_SESSION['user_id'];
+        $sqlReq = "UPDATE products SET product_request =product_request+ 1 WHERE `product_id` = $requestId";
+        $result = mysqli_query($conn, $sqlReq);
+        if($result){
+            header("Location: $script?$params&request=True");
+        }
+        else{
+            header("Location: $script?$params&request=False");
+        }
+    }
     $script   = $_SERVER['SCRIPT_NAME'];
     $params   = $_SERVER['QUERY_STRING'];
     include 'partials/_header.php'; 
-    include 'partials/_dbconnect.php';
-    $script   = $_SERVER['SCRIPT_NAME'];
-    $params   = $_SERVER['QUERY_STRING'];
 
      if(isset($_GET["err"])){
         $err = $_GET["err"];
@@ -53,6 +67,32 @@
         }else{
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> Comment not added.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
+    if(isset($_GET["request"])){
+        if($_GET["request"]=="True"){
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Thanks for your request.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }else{
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Request not added.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
+    if(isset($_GET["delete"])){
+        if($_GET["delete"]=="true"){
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Comment and rating deleted.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }else{
+            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Comment and rating not deleted.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
         }
@@ -143,6 +183,12 @@
     echo'
     <p>
         <button class="btn btn-secondary" disabled>Add to cart</button>
+        <form action="'.$_SERVER['PHP_SELF'].'" method="post">
+        <input type="hidden" name="requestId" id="id" value='.$id.'>
+        <input type="hidden" name="script" id="script" value='. $script.'>
+        <input type="hidden" name="params" id="params" value='. $params.'>
+        <button class="btn btn-primary" type="submit" name="request_product" style="margin-left: 10px;">Request for this product</button>
+        </form>
         <br clear="both" />
     </p>';
     }
@@ -237,7 +283,37 @@
                     $result2 = mysqli_query($conn, $sql2);
                     $row2 = mysqli_fetch_assoc($result2);
                     $commented_by = $row2['user_name'];
-                    
+                    if($_SESSION['user_type']== 'admin'){
+                        echo'
+                    <div class="" style="margin-top: 10px;">
+                        <div class="d-flex my-3">
+                            <form method="post" action="/store/partials/_deleteComment.php" style="margin-right: 10px">
+                                <input type="hidden" name="commentId" value="'.$row['comment_id'].'">
+                                <input type="hidden" name="script" value="'.$script.'">
+                                <input type="hidden" name="params" value="'.$params.'">
+                                <button class="btn" type="submit"><i class="fa fa-trash" style="color: red; align-item: right"></i></button>
+                            </form>
+                            <div class="flex-shrink-0">
+                                <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
+                                    width="54px" height="54px" alt="">
+                            </div>
+                            <div class="media-body flex-grow-1 ms-3">
+                            <p class="my-0" style="margin-right: 30px"><strong>'.$commented_by.'</strong>'; 
+                            $temp = 5-$rating;
+                            for($i=0; $i<$rating; $i++){
+                                echo '<span class="fa fa-star checked"></span>';
+                            }
+                            for($i=0; $i<$temp; $i++){
+                                echo '<span class="fa fa-star"></span>';
+                            }
+                            
+                            echo'
+                            </p>    
+                            '.$comment.'
+                            </div>
+                        </div>
+                ';  
+                    }else{
                     echo'
                     <div class="" style="margin-top: 10px;">
                         <div class="d-flex my-3">
@@ -259,7 +335,7 @@
                             </div>
                         </div>
                 ';    
-                }
+                }}
             
             echo'
     </div>
