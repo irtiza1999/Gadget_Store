@@ -283,7 +283,7 @@
                     $result2 = mysqli_query($conn, $sql2);
                     $row2 = mysqli_fetch_assoc($result2);
                     $commented_by = $row2['user_name'];
-                    if($_SESSION['user_type']== 'admin'){
+                    if(isset($_SESSION['user_type']) && $_SESSION['user_type']== 'admin'){
                         echo'
                     <div class="" style="margin-top: 10px;">
                         <div class="d-flex my-3">
