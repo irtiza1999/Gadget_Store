@@ -29,8 +29,10 @@
         $requestId = (int)$requestId;
         $script = $_POST["script"];
         $params = $_POST["params"];
-        $user = $_SESSION['user_id'];
-        $sqlReq = "UPDATE products SET product_request =product_request+ 1 WHERE `product_id` = $requestId";
+        $user = $_POST["requestUser"];
+        $reqName = $_POST["requestName"];
+        $reqCat = $_POST["requestCat"];
+        $sqlReq = "INSERT INTO `request` (`request_user_id`, `request_product_name`, `request_product_id`,`request_catagory` ,`request_time`) VALUES ('$user', '$reqName', '$requestId', '$reqCat', current_timestamp())";
         $result = mysqli_query($conn, $sqlReq);
         if($result){
             header("Location: $script?$params&request=True");
@@ -182,13 +184,31 @@
     else{
     echo'
     <p>
-        <button class="btn btn-secondary" disabled>Add to cart</button>
+        <button class="btn btn-secondary" disabled>Add to cart</button>';
+        if(isset($_SESSION['user_id'])){
+            $curUser = $_SESSION['user_id'];
+            $checkReqCountSql = "SELECT * FROM `request` WHERE request_user_id = $curUser AND request_product_id = $id";
+            $checkReqCountResult = mysqli_query($conn, $checkReqCountSql);
+            $checkReqCount = mysqli_num_rows($checkReqCountResult);
+        if($checkReqCount>0){
+            echo'
+            <button class="btn btn-primary" style="margin-left: 10px;" disabled>Requested</button>';
+        }else{
+        echo'
         <form action="'.$_SERVER['PHP_SELF'].'" method="post">
         <input type="hidden" name="requestId" id="id" value='.$id.'>
+        <input type="hidden" name="requestName" id="id" value='.$name.'>
+        <input type="hidden" name="requestCat" id="id" value='.$category.'>
+        <input type="hidden" name="requestUser" id="id" value='.$_SESSION['user_id'].'>
         <input type="hidden" name="script" id="script" value='. $script.'>
         <input type="hidden" name="params" id="params" value='. $params.'>
         <button class="btn btn-primary" type="submit" name="request_product" style="margin-left: 10px;">Request for this product</button>
-        </form>
+        </form>';}
+        }else{
+            echo'
+            <a href="/store/login.php"><button class="btn btn-primary" style="margin-left: 10px;">Login to Request</button></a>';
+        }        
+        echo'
         <br clear="both" />
     </p>';
     }

@@ -82,6 +82,7 @@
                                 <li class="nav-item"><a  class="nav-link s1" href="/store/manageUser.php">Manage Users</a></li>
                                 <li class="nav-item"><a  class="nav-link s1" href="/store/manageProduct.php">Manage Products</a></li>
                                 <li class="nav-item"><a  class="nav-link s1" href="/store/manageOrder.php">Manage Orders</a></li>
+                                <li class="nav-item"><a  class="nav-link s1" href="/store/manageRequest.php">Requested Products</a></li>
                             </ul>
                         </li>';
                     }

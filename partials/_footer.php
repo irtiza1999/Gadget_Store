@@ -16,6 +16,13 @@
 <body>
     <footer class="page-footer text-center font-small mt-4 wow fadeIn">
         <hr class="my-4">
+        <div class="footer-copyright py-3">
+            <h4>
+                <marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount=""><a class="link-info"
+                        href="/store/request.php">Request For a Product</a>
+                </marquee>
+            </h4>
+        </div>
         <div class="pb-4">
             <a href="">
                 <i class="fab fa-facebook-f mr-3"></i>

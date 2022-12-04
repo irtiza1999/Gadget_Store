@@ -38,6 +38,6 @@ nav ul ul li {
 	position: relative;
     background-color: black;
     color: white;
-	position: fixed;
-	z-index: 999;
+	/* position: fixed;
+	z-index: 999; */
 }
