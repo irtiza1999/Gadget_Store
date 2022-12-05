@@ -11,6 +11,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
+    <style>
+    .blink {
+        padding: 15px;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .b1 {
+        animation: blink 1s linear infinite;
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: .5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -18,9 +43,9 @@
         <hr class="my-4">
         <div class="footer-copyright py-3">
             <h4>
-                <marquee onMouseOver="this.stop()" onMouseOut="this.start()" scrollamount=""><a class="link-info"
-                        href="/store/request.php">Request For a Product</a>
-                </marquee>
+                <div class="blink"><span class="b1"><a class="link-info" href="/store/request.php">Request For a
+                            Product</a></span>
+                </div>
             </h4>
         </div>
         <div class="pb-4">
