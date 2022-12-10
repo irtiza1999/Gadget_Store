@@ -96,7 +96,7 @@
             </div>
             <button type="submit" class="btn btn-success">SignUp</button>
         </form>
-        <p style="margin-top: 20px">Already have an account? Click <a href="/store/login.php">Here</a></p>
+        <p style="margin-top: 20px">Already have an account? <a href="/store/login.php">Login</a></p>
     </div>
     <script>
     if (window.history.replaceState) {

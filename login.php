@@ -77,7 +77,7 @@
             </div>
             <button type="submit" class="btn btn-success">Login</button>
         </form>
-        <p style="margin-top: 20px">Don't have an account? Click <a href="/store/signup.php">Here</a></p>
+        <p style="margin-top: 20px">Don't have an account? <a href="/store/signup.php">Signup</a></p>
     </div>
 </body>
 

@@ -289,7 +289,8 @@
                 </div>';
                 
                 }}}
-                $sql = "SELECT * FROM `comments` WHERE commented_for = $id";
+                //Inner Join Query
+                $sql = "SELECT comments.comment_id, comments.comment_content,comments.commented_by,comments.commented_for,comments.rating,comments.timestamp,users.user_name FROM `comments` INNER JOIN `users` ON  users.user_id = comments.commented_by WHERE commented_for = $id";
                 $result = mysqli_query($conn, $sql);
                 $num = mysqli_num_rows($result);
                 if($num != 0){
@@ -299,10 +300,7 @@
                     $comment = $row['comment_content'];
                     $commented_by = $row['commented_by'];
                     $rating = $row['rating'];
-                    $sql2 = "SELECT * FROM `users` WHERE user_id = $commented_by";
-                    $result2 = mysqli_query($conn, $sql2);
-                    $row2 = mysqli_fetch_assoc($result2);
-                    $commented_by = $row2['user_name'];
+                    $commented_by = $row['user_name'];
                     if(isset($_SESSION['user_type']) && $_SESSION['user_type']== 'admin'){
                         echo'
                     <div class="" style="margin-top: 10px;">
