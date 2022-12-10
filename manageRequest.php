@@ -85,10 +85,11 @@
                 echo'</div>
             </div>';
             }else{
-                $sql3 = "SELECT product_stock FROM `products` WHERE `product_id` = '$pid'";
+                $sql3 = "SELECT product_stock, product_name FROM `products` WHERE `product_id` = '$pid'";
                 $result3 = mysqli_query($conn, $sql3);
                 $row3 = mysqli_fetch_assoc($result3);
                 $stock = $row3['product_stock'];
+                $pName = $row3['product_name'];
                 if($stock == 0){
                 echo'<div class="card"  style="margin: 10px">
                 <div class="card-header d-flex justify-content-between">
@@ -96,7 +97,7 @@
                     <p style="font-style: italic">'.time_elapsed_string($req_time).'<p>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title"><a href="/store/productPage.php?productId='.$pid.'">'.$name.'</a></h5>';
+                    <h5 class="card-title"><a href="/store/productPage.php?productId='.$pid.'">'.$pName.'</a></h5>';
                     $sql2 = "SELECT user_name FROM `users` WHERE `user_id`='$user_id'";
                     $result2 = mysqli_query($conn, $sql2);
                     $row2 = mysqli_fetch_assoc($result2);
