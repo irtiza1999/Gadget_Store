@@ -82,9 +82,11 @@
             </a>
         </div>
         <div class="footer-copyright py-3">
+            <a href="/store/index.php"><img src="/store/uploads/logo.png" height="100"> </a></br>
             ©
             <?php echo date("Y") ?> Copyright:
             <a href="/store/index.php"> Gadget Store </a>
+
         </div>
 
     </footer>
