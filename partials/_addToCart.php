@@ -16,7 +16,7 @@ if(!(isset($_SESSION["cart"]))){
             $stock = $row['product_stock'];
         }
         if($quan>0 && $quan <= $stock && filter_var($quan,FILTER_VALIDATE_INT)){
-                $_SESSION['cart'][$id] = $quan;
+            $_SESSION['cart'][$id] = $quan;
             // $sql = "Update `products` SET `product_stock` = `product_stock` - $quan WHERE `product_id` = $id";
             // $result = mysqli_query($conn, $sql);
             

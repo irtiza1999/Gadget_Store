@@ -69,7 +69,7 @@
                             <hr>
                             <h5>Payment method</h5>
                             <div class="d-block my-3">';
-                            if(isset($_SESSION['stipePay']) && $_SESSION['stipePay'] == true){
+                            if(isset($_SESSION['stipePay']) && $_SESSION['stipePay'] == true && isset($_GET['tId'])){
                                 echo'<input class="form" type="hidden" name="exampleRadios" id="exampleRadios1" value="stripe">';
                                 echo '<div class="alert alert-success alert fade show" role="alert">
                                 <strong>Success!</strong> Your payment is successfully done via Stripe.<br>

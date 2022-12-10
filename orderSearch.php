@@ -1,45 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gadget Store</title>
     <link rel="icon" type="image/x-icon"
         href="https://w7.pngwing.com/pngs/93/456/png-transparent-gadget-devices-technology-smartphone-tablet-smart-phone-android-iphone-ipad-mobile-thumbnail.png">
-    <title>Manage Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-}
+
+    <?php include 'partials/_dbconnect.php';
+    session_start();
     if(!isset($_SESSION['user_type'])||$_SESSION['user_type']!='admin'){
         header("location: /store/index.php");
-    }
-    else{
-        include 'partials/_header.php';
-        include 'partials/_dbconnect.php';
-        if(isset($_GET['error']) && $_GET['error'] == 'true'){
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong> Something went wrong.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
-        }
-        echo'
-        <div class="container" >
-        <div class="" style= "padding-top: 50px; padding-bottom: 20px;">
-        <h1 class="text-center">All Orders</h1>
-            <form class="d-flex" role="search" action="/store/orderSearch.php" method="get">
-                    <input class="form-control me-2" type="search" placeholder="Search for a Order"
-                        aria-label="Search" name="search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-        </div>
-                <div class="row">
-                <div class="col-sm-12 col-md-12 col-md-offset-1">
-                    <table class="table table-hover">
+    } 
+    ?>
+    <?php include 'partials/_header.php' ?>
+    <div class="container my-4">
+        <div class="container search my-3">
+            <?php
+                $noResult = true;
+                $temp = $_GET['search'];
+                $sql = "SELECT * FROM `orders` WHERE order_id LIKE '$temp' or order_user_id LIKE '$temp' or order_status LIKE '$temp' or payment_status LIKE '$temp' or payment_method LIKE '$temp' ORDER BY `orders`.`order_id` DESC";
+                $result = mysqli_query($conn, $sql);
+                $check = mysqli_num_rows($result);
+                if($check>0 && strlen($temp)>0){
+                    $noResult = false;
+                }
+                echo'<h1 class="my-3">Search results for <em> '.$temp.'</em></h1>
+                        <div class="row">
+                        <div class="col-sm-12 col-md-12 col-md-offset-1">
+                        <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center">Order Id</th>
@@ -49,20 +44,16 @@
                                 <th class="text-center">Order Status</th>
                             </tr>
                         </thead>
-                <tbody>
-                ';
-                    $sql = "SELECT * FROM `orders` ORDER BY `orders`.`order_id` DESC";
-                    $result = mysqli_query($conn, $sql);
-                    $num = mysqli_num_rows($result);
-                    if ($num>0){
-                        while($row = mysqli_fetch_assoc($result)){
-                        $orderId = $row['order_id'];
-                        $paymentMethod = $row['payment_method'];
-                        $amountPaid = $row['bill'];
-                        $status = $row['order_status'];
-                        $payStatus = $row['payment_status'];
-                        echo'
-                <tr>
+                <tbody>';
+            if(strlen($temp)>0){
+                while($row=mysqli_fetch_assoc($result)){
+                    $orderId = $row['order_id'];
+                    $paymentMethod = $row['payment_method'];
+                    $amountPaid = $row['bill'];
+                    $status = $row['order_status'];
+                    $payStatus = $row['payment_status'];
+                echo'
+                   <tr>
                 <td class="text-center">
                 <a href="/store/orderPage.php?orderId='.$orderId.'"><span>#'.$orderId.'</span></a>
                 </td>
@@ -111,16 +102,33 @@
                 
                 echo
                 '</tr>
-        </a>';
-                }}
-                ;}
+        </a>
+                ';}
+            }
     
-    
+    echo' </div>
+    </div>';
+    if($noResult){
+        echo '<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <p class="display-4">No results found</p>
+          <p class="lead">Search for anything else.</p>
+        </div>';
+      }
+    // include 'partials/_footer.php';
     ?>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

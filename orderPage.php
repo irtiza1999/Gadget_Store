@@ -112,13 +112,13 @@
                 $sum = 0;
                 foreach($cart as $key => $item){
                     $sql3 = "SELECT * FROM `products` WHERE `product_id` = $key";
-                    $quan = $item[0];
+                    $quan = $item;
                     $result3 = mysqli_query($conn, $sql3);
                     while($row = mysqli_fetch_assoc($result3)){
                         $product_name = $row['product_name'];
                         $product_price = $row['product_price'];
                         $product_image = $row['product_image'];
-                        $sum += ($product_price * $quan)              
+                        $sum = $sum + ($product_price * $quan)              
                         ;}
                     
                 echo'
@@ -132,17 +132,15 @@
                         </figure>
                     </li>
                     ';
-                    
                 }
-                
                 echo'
                 </ul>
                 <hr>
                 <div> <strong>Order summary</strong> </div>
                 <dl class="dlist-align">
-                    <dt>Total price = $'.$sum.'</dt>
-                    <span class="text-muted text-right">Shipping Cost = $'.$bill - $sum.' </span>
-                    <h4 class="text-right"><strong>Total Bill : $'.$bill.' </strong></h4>
+                    <dt>Total price = $'.$sum.'</dt>';
+                   echo'<span class="text-muted text-right">Shipping Cost = $'.$bill - $sum.' </span>';
+                    echo'<h4 class="text-right"><strong>Total Bill : $'.$bill.' </strong></h4>
                 </div>
             </div>
         </article>
