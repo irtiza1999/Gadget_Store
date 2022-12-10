@@ -19,7 +19,11 @@
         integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 
-
+    <style>
+    body {
+        font-family: "Trebuchet MS", sans-serif;
+    }
+    </style>
 </head>
 
 <body>

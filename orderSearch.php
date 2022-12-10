@@ -32,7 +32,13 @@
                     $noResult = false;
                 }
                 echo'<h1 class="my-3">Search results for <em> '.$temp.'</em></h1>
-                        <div class="row">
+                    <form class="d-flex" role="search" action="/store/orderSearch.php" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search for a Order"
+                        aria-label="Search" name="search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>';
+                if(!$noResult){
+                        echo'<div class="row">
                         <div class="col-sm-12 col-md-12 col-md-offset-1">
                         <table class="table table-hover">
                         <thead>
@@ -44,7 +50,7 @@
                                 <th class="text-center">Order Status</th>
                             </tr>
                         </thead>
-                <tbody>';
+                <tbody>';}
             if(strlen($temp)>0){
                 while($row=mysqli_fetch_assoc($result)){
                     $orderId = $row['order_id'];
@@ -109,7 +115,7 @@
     echo' </div>
     </div>';
     if($noResult){
-        echo '<div class="jumbotron jumbotron-fluid">
+        echo '<div class="container jumbotron jumbotron-fluid">
         <div class="container">
           <p class="display-4">No results found</p>
           <p class="lead">Search for anything else.</p>
