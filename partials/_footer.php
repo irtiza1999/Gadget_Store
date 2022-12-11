@@ -16,10 +16,21 @@
         padding: 15px;
         text-align: center;
         line-height: 50px;
+        color: red !important;
+        transition: transform .2s;
+
     }
 
     .b1 {
         animation: blink 1s linear infinite;
+    }
+
+    .b1:hover {
+        animation: none;
+    }
+
+    .blink:hover {
+        transform: scale(1.5);
     }
 
     @keyframes blink {
@@ -43,7 +54,7 @@
         <hr class="my-4">
         <div class="footer-copyright py-3">
             <h4>
-                <div class="blink"><span class="b1"><a class="link-info" href="/store/request.php">Request For a
+                <div class="blink"><span class="b1"><a class="blink" href="/store/request.php">Request For a
                             Product</a></span>
                 </div>
             </h4>

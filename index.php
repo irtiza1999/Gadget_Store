@@ -17,12 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
         integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-
-    <style>
-    body {
-        font-family: "Trebuchet MS", sans-serif;
-    }
-    </style>
+    <link rel="stylesheet" href="/store/index.css">
 </head>
 
 <body>
@@ -173,7 +168,7 @@
                                             <input type="hidden" name="id" id="id" value='.$id.'>
                                             <input type="hidden" name="script" id="script" value='. $script.'>
                                             <input type="hidden" name="quan" id="quan" value=1>
-                                            <button type="submit" class="bg-cart btn btn-success"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+                                            <button type="submit" class="bg-cart glow-on-hover"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
                                         </form>';
                                     }
                                     echo'
