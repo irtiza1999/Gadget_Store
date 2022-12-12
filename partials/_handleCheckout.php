@@ -46,7 +46,6 @@
                     $sql3 = "Update `products` SET `product_stock` = `product_stock` - $quan WHERE `product_id` = $key";
                     $result3 = mysqli_query($conn, $sql3);          
                 }  
-
             unset($_SESSION['cart']);
             unset($_SESSION['stipePay']);
             unset($_COOKIE['paidBill']);

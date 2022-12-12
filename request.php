@@ -17,6 +17,8 @@
 
 <body>
     <?php
+    $script   = $_SERVER['SCRIPT_NAME'];
+    $params   = $_SERVER['QUERY_STRING'];
     session_start();
     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']==true){
     include 'partials/_dbconnect.php';

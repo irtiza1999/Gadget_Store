@@ -3,8 +3,8 @@
     $showErr = false;
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         include 'partials/_dbconnect.php';
-        
-        // $params = $_POST["params"];
+        $script = $_POST["script"];
+        $params = $_POST["params"];
         $userMail = $_POST["loginEmail"];
         $password = $_POST["loginPass"];
         $exists = false;
