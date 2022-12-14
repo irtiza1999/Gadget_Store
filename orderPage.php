@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <?php 
-    include 'partials/_header.php';
+    <?php
     include 'partials/_dbconnect.php';
+    $showPage = false;
     $orderId = $_GET['orderId'];
     $sql = "SELECT * FROM `orders` WHERE `order_id` = $orderId";
     $result = mysqli_query($conn, $sql);
@@ -29,16 +29,21 @@
         $order_payment_method = $row['payment_method'];
         $order_time = $row['order_time'];
     }
-    $sql2="SELECT * FROM `users` WHERE `user_id` = $order_user_id";
-    $result2 = mysqli_query($conn, $sql2);
+    if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $order_user_id){
+        $sql2="SELECT * FROM `users` WHERE `user_id` = $order_user_id";
+        $result2 = mysqli_query($conn, $sql2);
     while($row = mysqli_fetch_assoc($result2)){
         $order_user_name = $row['user_name'];
         $order_user_email = $row['user_email'];
         $order_user_phone = $row['user_phone_no'];
         $order_user_address = $row['user_address'];
     }
+    $showPage = true;
+    }
     
-    echo'
+    if($showPage){
+    include 'partials/_header.php';
+        echo'
     <div class="container">
         <article class="card">
             <header class="card-header"><strong> Thanks for the order '.$order_user_name.' </strong></header>
@@ -144,6 +149,10 @@
             </div>
         </article>
     </div>';
+    }else{
+        header('Location: /store/index.php');
+    }
+    
     ?>
     <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js">
     </script>
